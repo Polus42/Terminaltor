@@ -3,42 +3,32 @@
 class Affichage
 {
 public:
-	Affichage();
+	Affichage(int width, int height);
 	~Affichage();
-	void init();
-	void draw(int** matrix);
+	/*Prends un buffer en param
+	Un buffer est une structure :
+
+	typedef struct _CHAR_INFO {
+	union {
+	WCHAR UnicodeChar;
+	CHAR  AsciiChar;
+	} Char;
+	WORD  Attributes;
+	} CHAR_INFO, *PCHAR_INFO;
+
+	*/
+	void draw();
 private:
-	int SCREEN_WIDTH;
-	int SCREEN_HEIGHT;
-	HANDLE hOutput = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
+	// Taille de l'écran
+	const static int SCREEN_WIDTH = 200;
+	const static int SCREEN_HEIGHT = 200;
+	// Output (console)
+	HANDLE hOutput;
 
-	COORD dwBufferSize = { SCREEN_WIDTH, SCREEN_HEIGHT };
-	COORD dwBufferCoord = { 0, 0 };
-	SMALL_RECT rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
+	COORD dwBufferSize;
+	COORD dwBufferCoord;
+	SMALL_RECT rcRegion;
 
-	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
-
-	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
-		dwBufferCoord, &rcRegion);
-
-	buffer[5][10].Char.AsciiChar = 'H';
-	buffer[5][10].Attributes = 0x0E;
-	buffer[5][11].Char.AsciiChar = 'i';
-	buffer[5][11].Attributes = 0x0B;
-	buffer[5][12].Char.AsciiChar = '!';
-	buffer[5][12].Attributes = 0x0A;
-
-	for (int i = 0; i < 100; i++)
-	{
-		for (int y = 0; y < 100; y++)
-		{
-			int a = rand();
-			char r1 = (unsigned char)a;
-			buffer[i][y].Char.AsciiChar = r1;
-		}
-	}
-
-	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
-		dwBufferCoord, &rcRegion);
+	CHAR_INFO buffer[SCREEN_WIDTH][SCREEN_HEIGHT];
 };
 

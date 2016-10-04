@@ -64,7 +64,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Affichage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NYTimer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Affichage.h" />
+    <ClInclude Include="NYTimer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
