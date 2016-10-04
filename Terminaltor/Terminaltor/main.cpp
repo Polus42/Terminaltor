@@ -17,16 +17,23 @@ int main(int argc, char *argv[])
 	while (true)
 	{
 		current = t->getElapsedMs();
-
+		/////////////////////////////////////////
+		// Gauche droite saut
+		// GetAsyncKeyState -> Windows api
 		/////////////////////////////////////////
 		// Update goes here
 		/////////////////////////////////////////
+		if (buffer > 1000)
+		{
+			buffer -= 1000;
 
+		}
 		system("pause");
 		/////////////////////////////////////////
 
 		previous = t->getElapsedMs();
 		std::cout << previous-current << std::endl;
+		buffer += previous - current;
 	}
 	return 0;
 }
