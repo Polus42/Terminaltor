@@ -65,15 +65,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Affichage.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NYTimer.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Affichage.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="NYTimer.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,8 +9,8 @@ enum tile_t {
 class Terrain
 {
 public:
-	Terrain( int width, int height );
-	~Terrain();
+	static void CreateInstance( int width, int height );
+	inline static Terrain& GetInstance() { return s_instance; };
 
 	void Slide( const int distance );
 	void Generate( const int distance );
@@ -19,9 +19,14 @@ public:
 	inline int Height() { return m_height; }
 	inline int Distance() { return m_distance; }
 
-	int* GetColumn( const int index );//function must be called with a positive value inferior to terrain width
+	int GetTile( const int x, const int y );//function must be called with a positive value inferior to terrain width
 
 private:
+	Terrain( int width, int height );
+	~Terrain();
+
+	static Terrain s_instance;
+
 	int m_width;
 	int m_height;
 	int** m_tiles;
