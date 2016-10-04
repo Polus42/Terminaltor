@@ -1,5 +1,9 @@
 #include "Terrain.h"
 
+void Terrain::CreateInstance( int width, int height ) {
+	s_instance = Terrain( width, height );
+}
+
 Terrain::Terrain( const int width, const int height ) :
 m_width( width ),
 m_height( height ),
@@ -26,16 +30,18 @@ void Terrain::Slide( const int distance) {
 	m_slideOffset += distance;
 	if ( m_slideOffset > m_width )
 		m_slideOffset -= m_width;
-	Generate(distance);
+	m_distance += distance * 100;
+	Generate( distance );
 }
 
-int* Terrain::GetColumn( const int index) {
-	int column_index = index + m_slideOffset;
+int Terrain::GetTile(const int x, const int y) {
+	int tmp = ( x - m_distance ) / 100;
+	int column_index = x + m_slideOffset;
 	if ( column_index > m_width )
 		column_index -= m_width;
-	return m_tiles[column_index];
+	return m_tiles[y / 100][column_index];
 }
 
-void Terrain::Generate(const int distance) {
+void Terrain::Generate( const int distance ) {
 
 }
