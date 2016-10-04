@@ -5,6 +5,7 @@
 #include <time.h> 
 #include "Affichage.h"
 #include "NYTimer.h"
+
 int main(int argc, char *argv[])
 {
 	NYTimer *t = new NYTimer();

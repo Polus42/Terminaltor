@@ -17,15 +17,16 @@ Terrain::~Terrain()
 {
 	for (int w = 0; w < m_width; w++){
 		int* column = m_tiles[w];
-		free( column );
+		delete[] column;// free(column);
 	}
 	free( m_tiles );
 }
 
-void Terrain::Slide( const int distance) {
+void Terrain::Slide(const int distance) {
 	m_slideOffset += distance;
 	if ( m_slideOffset > m_width )
 		m_slideOffset -= m_width;
+	m_distance += distance;
 	Generate(distance);
 }
 

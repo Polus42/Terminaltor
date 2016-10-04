@@ -67,10 +67,12 @@
     <ClCompile Include="Affichage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NYTimer.cpp" />
+    <ClCompile Include="Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Affichage.h" />
     <ClInclude Include="NYTimer.h" />
+    <ClInclude Include="Terrain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
