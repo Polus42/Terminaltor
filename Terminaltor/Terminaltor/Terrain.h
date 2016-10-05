@@ -33,5 +33,5 @@ private:
 
 	int m_distance;
 
-	int m_lastHeight;
+	int m_lastGroundHeight;
 };

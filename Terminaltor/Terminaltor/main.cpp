@@ -5,26 +5,35 @@
 #include <time.h> 
 #include "Affichage.h"
 #include "NYTimer.h"
+
 int main(int argc, char *argv[])
 {
 	NYTimer *t = new NYTimer();
 	t->start();
-	int i = 0;
-	int elapsed = t->getElapsedMs();
+	int previous = 0;
+	int current = 0;
+	int buffer = 0;
 	// Boucle affichage
-	while (i<1000)
+	while (true)
 	{
-		elapsed = t->getElapsedMs() - elapsed;
-		std::cout << elapsed << std::endl;
-		i++;
+		current = t->getElapsedMs();
+		/////////////////////////////////////////
+		// Gauche droite saut
+		// GetAsyncKeyState -> Windows api
+		/////////////////////////////////////////
+		// Update goes here
+		/////////////////////////////////////////
+		if (buffer > 1000)
+		{
+			buffer -= 1000;
+
+		}
+		system("pause");
+		/////////////////////////////////////////
+
+		previous = t->getElapsedMs();
+		std::cout << previous-current << std::endl;
+		buffer += previous - current;
 	}
-	/*Affichage *a = new Affichage(100,100);
-	int i = 0;
-	while(i<1000)
-	{
-		a->draw();
-		i++;
-	}*/
-	system("pause");
 	return 0;
 }
