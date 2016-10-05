@@ -11,7 +11,7 @@ private:
 	~Terrain();
 
 public:
-	static void CreateInstance( int width, int height );
+	static void ResizeInstance( int width, int height );
 	static Terrain& GetInstance();
 
 	void Slide( const int distance );
@@ -26,10 +26,12 @@ public:
 protected:
 	static Terrain s_instance;
 
+	void FreeTiles();
+
 	int m_width;
 	int m_height;
 	int** m_tiles;
-	int m_slideOffset;
+	int m_columnOffset;
 
 	int m_distance;
 

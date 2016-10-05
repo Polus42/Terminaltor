@@ -67,9 +67,12 @@
     <ClCompile Include="Affichage.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GoRightCommand.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NYTimer.cpp" />
+    <ClCompile Include="QuitCommand.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -77,9 +80,13 @@
   <ItemGroup>
     <ClInclude Include="Affichage.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GoRightCommand.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="NYTimer.h" />
+    <ClInclude Include="QuitCommand.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Tile.h" />

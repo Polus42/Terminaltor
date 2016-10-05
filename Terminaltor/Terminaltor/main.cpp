@@ -6,6 +6,11 @@
 #include "Affichage.h"
 #include "NYTimer.h"
 #include "Terrain.h"
+#include "InputHandler.h"
+#include "QuitCommand.h"
+#include "GoRightCommand.h"
+
+#define RIGHT_KEY 0x0001
 
 int main(int argc, char *argv[])
 {
@@ -15,28 +20,35 @@ int main(int argc, char *argv[])
 	int previous = 0;
 	int current = t->getElapsedMs();
 	int buffer = 0;
+	int delay = 33;
+	int keysMask = 0;
 	
 	//Creation terrrain
-	Terrain::CreateInstance(80, 25);
-
+	Terrain::ResizeInstance(80, 25);
+	//Creation character
+	Character *c = new Character(0,0,50,180,100);
+	InputHandler *input = new InputHandler(Terrain::GetInstance(),*c);
+	// Assigning each key a command
+	input->setEscape(new QuitCommand());
+	input->setKeyRight(new GoRightCommand(c, &Terrain::GetInstance()));
 
 	// Boucle affichage
 	while (true)
 	{
 		previous = current;
-		/////////////////////////////////////////
-		// Gauche droite saut
-		// GetAsyncKeyState -> Windows api
-		/////////////////////////////////////////
-		// Update goes here
-		/////////////////////////////////////////
-		if (buffer > 1000)
+
+		if (buffer > delay)
 		{
-			buffer -= 1000;
-			aff->draw(Terrain::GetInstance());
-			//std::cout << "update" << std::endl;
+			buffer = buffer % delay;
+			/////////////////////////////////////////
+			// Update physics and input here
+			/////////////////////////////////////////
+			input->handleInput();
 		}
-		//system("pause");
+		/////////////////////////////////////////
+		// Update drawing here
+		/////////////////////////////////////////
+		aff->draw(Terrain::GetInstance());
 		/////////////////////////////////////////
 		current = t->getElapsedMs();
 		buffer += current - previous;

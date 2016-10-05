@@ -19,7 +19,7 @@ Affichage::~Affichage()
 {
 }
 
-void Affichage::draw(Terrain& t )
+void Affichage::draw( Terrain& t )
 {
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
@@ -31,7 +31,7 @@ void Affichage::draw(Terrain& t )
 		for (int y = 0; y < t.Height(); y++)
 		{
 			//buffer[x][y] = mymap.at(t.GetTile(x, y));
-			buffer[x][y].Char.AsciiChar = t.GetTile(x, y)?'█':' ';
+			buffer[t.Height()-y-1][x].Char.UnicodeChar = t.GetTile(x * 100 + t.Distance(), y * 100) ? 0x20 : 0xdb;
 		}
 	}
 
