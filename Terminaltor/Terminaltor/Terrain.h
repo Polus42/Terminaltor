@@ -1,9 +1,7 @@
 #pragma once
 
-enum tile_t {
-	Air,
-	Ground
-};
+#define MIN_HEIGHT 5
+#define MAX_HEIGHT 15
 
 class Terrain
 {
