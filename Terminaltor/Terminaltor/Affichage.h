@@ -27,8 +27,8 @@ public:
 	void draw(Terrain& t);
 private:
 	// Taille de l'écran
-	const static int SCREEN_WIDTH = 200;
-	const static int SCREEN_HEIGHT = 200;
+	const static int SCREEN_WIDTH = 80;
+	const static int SCREEN_HEIGHT = 25;
 	// Output (console)
 	HANDLE hOutput;
 
@@ -36,7 +36,7 @@ private:
 	COORD dwBufferCoord;
 	SMALL_RECT rcRegion;
 
-	CHAR_INFO buffer[SCREEN_WIDTH][SCREEN_HEIGHT];
+	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 	//std::map<const int, CHAR_INFO> mymap = {
 	//	{ 0, CHAR_INFO((0x0860), (0x0B)) },

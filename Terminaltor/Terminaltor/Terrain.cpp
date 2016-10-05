@@ -7,37 +7,37 @@ Terrain Terrain::s_instance;
 Terrain::Terrain() :
 m_width( 0 ),
 m_height( 0 ),
-m_slideOffset( 0 )
+m_columnOffset( 0 ),
+m_distance( 0 )
 {
-}
-
-Terrain::Terrain( const int width, const int height ) :
-m_width( width ),
-m_height( height ),
-m_slideOffset( 0 ),
-m_lastGroundHeight( ( MIN_HEIGHT + MAX_HEIGHT) / 2 )
-{
-	m_tiles = new int*[width];
-	for (int w = 0; w < width; w++){
-		int* column = new int[height];
-		m_tiles[w] = column;
-	}
-	Generate( width );
 }
 
 Terrain::~Terrain()
 {
-	for (int w = 0; w < m_width; w++){
-		int* column = m_tiles[w];
-		delete[] column;
+	FreeTiles();
+}
+
+void Terrain::FreeTiles() {
+	for ( int w = 0; w < m_width*2; ++w ) {
+		delete[] m_tiles[w];
 	}
 	delete[] m_tiles;
 }
 
-void Terrain::CreateInstance(int width, int height) {
+void Terrain::ResizeInstance( int width, int height ) {
 	if ( s_instance.Width() == 0 || s_instance.Height() == 0 ) {
 		srand(time(NULL));
-		s_instance = Terrain(width, height);
+		s_instance.FreeTiles();
+		s_instance.m_width = width;
+		s_instance.m_height = height;
+		s_instance.m_columnOffset = 0;
+		s_instance.m_distance = 0;
+		s_instance.m_lastGroundHeight = ((MIN_HEIGHT + MAX_HEIGHT) / 2);
+		s_instance.m_tiles = new int*[width*2];
+		for ( int w = 0; w < width*2; ++w ){
+			s_instance.m_tiles[w] = new int[height];
+		}
+		s_instance.Generate(width);
 	}
 }
 
@@ -45,24 +45,21 @@ Terrain& Terrain::GetInstance() {
 	return s_instance;
 }
 
-void Terrain::Slide( const int distance) {
-	m_slideOffset += distance;
-	if ( m_slideOffset > m_width )
-		m_slideOffset -= m_width;
+void Terrain::Slide( const int distance ) {
+	m_columnOffset += distance;
+	if ( m_columnOffset > m_width )
+		m_columnOffset -= m_width;
 	m_distance += distance * 100;
 	Generate( distance );
 }
 
-int Terrain::GetTile(const int x, const int y) {
-	int tmp = ( x - m_distance ) / 100;
-	int column_index = x + m_slideOffset;
-	if ( column_index > m_width )
-		column_index -= m_width;
-	return m_tiles[y / 100][column_index];
+int Terrain::GetTile( const int x, const int y ) {
+	int column_index = ( ( x - m_distance ) / 100 ) + m_columnOffset;
+	return m_tiles[column_index][y / 100];
 }
 
 void Terrain::Generate( const int distance ) {
-	for ( int i = m_width - distance - m_slideOffset; i < m_width; i++ ) {
+	for ( int i = m_width - distance + m_columnOffset; i < m_width + m_columnOffset; ++i ) {
 		m_lastGroundHeight += rand()%3 - 1;
 		if ( m_lastGroundHeight > MAX_HEIGHT )
 			m_lastGroundHeight = MAX_HEIGHT;
