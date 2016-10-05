@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-	Affichage *aff = new Affichage(200,200);
+	Affichage *aff = new Affichage(80, 25);
 	NYTimer *t = new NYTimer();
 	t->start();
 	int previous = 0;
@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	int buffer = 0;
 	
 	//Creation terrrain
-	Terrain::CreateInstance(200, 200);
+	Terrain::CreateInstance(80, 25);
 
 
 	// Boucle affichage
