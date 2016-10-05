@@ -18,7 +18,7 @@ void Character::Jump() {
 	m_y++;
 }
 
-void Character::Update(long delta_ms) {
+void Character::Update( long delta_ms ) {
 	Terrain& terrain = Terrain::GetInstance();
 	
 	int testX = (m_xSpeed > 0) ? m_x + m_width : m_x;

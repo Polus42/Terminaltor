@@ -10,7 +10,7 @@ public:
 	Character( int x, int y, int width, int height, int health );
 	~Character();
 
-	virtual void Update( long delta_ms ) override;
+	void Update( long delta_ms ) override;
 
 	void Jump();
 

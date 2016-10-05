@@ -21,9 +21,9 @@ Terrain::~Terrain()
 {
 	for (int w = 0; w < m_width; w++){
 		int* column = m_tiles[w];
-		free( column );
+		delete[] column;
 	}
-	free( m_tiles );
+	delete[] m_tiles;
 }
 
 void Terrain::Slide( const int distance) {
