@@ -13,9 +13,16 @@ Character::~Character()
 {
 }
 
+void Character::Move( int direction ) {
+	m_ySpeed = direction<0 ? -WALK_SPEED : WALK_SPEED;
+}
+
 void Character::Jump() {
+	if ( !m_onFLoor )
+		return;
 	m_ySpeed = JUMP_SPEED;
 	m_y++;
+	m_onFLoor = false;
 }
 
 void Character::Update( long delta_ms ) {
@@ -33,16 +40,16 @@ void Character::Update( long delta_ms ) {
 		}
 	}
 	
-	bool onFloor = false;
 	int testY = (m_ySpeed > 0) ? m_y + m_height : m_y;
 	if ( terrain.GetTile( m_x, testY ) != 0 ) {
 		m_y /= 100;
 		m_y *= 100;
-		if ( m_ySpeed < 0 )
-			onFloor = true;
+		if ( m_ySpeed <= 0 )
+			m_onFLoor = true;
 		m_ySpeed = 0;
 	}
-	if (!onFloor) {
-		m_ySpeed -= 981000 / delta_ms;
+	if (!m_onFLoor) {
+		m_y += ( m_ySpeed * delta_ms ) / 1000;
+		m_ySpeed -= ( 981 * delta_ms ) / 1000;
 	}
 }
