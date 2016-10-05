@@ -1,5 +1,12 @@
 #pragma once
+#include "Terrain.h"
 #include <windows.h>
+#include <map>
+
+typedef struct cezcv {
+
+} lenomdemastruct;
+
 class Affichage
 {
 public:
@@ -17,7 +24,7 @@ public:
 	} CHAR_INFO, *PCHAR_INFO;
 
 	*/
-	void draw();
+	void draw(Terrain& t);
 private:
 	// Taille de l'écran
 	const static int SCREEN_WIDTH = 200;
@@ -30,5 +37,11 @@ private:
 	SMALL_RECT rcRegion;
 
 	CHAR_INFO buffer[SCREEN_WIDTH][SCREEN_HEIGHT];
+
+	//std::map<const int, CHAR_INFO> mymap = {
+	//	{ 0, CHAR_INFO((0x0860), (0x0B)) },
+	//	{ 1, buffer[0][0] },
+	//	{ 2, buffer[0][0] } };
+
 };
 

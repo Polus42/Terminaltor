@@ -1,5 +1,7 @@
-#include "Affichage.h"
+﻿#include "Affichage.h"
 #include "iostream"
+#include "Terrain.h"
+
 
 Affichage::Affichage(int width , int height)
 {
@@ -17,17 +19,21 @@ Affichage::~Affichage()
 {
 }
 
-void Affichage::draw()
+void Affichage::draw(Terrain& t )
 {
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
-	unsigned short r = 0x0860;
-	buffer[5][100].Char.UnicodeChar = r;
-	buffer[5][100].Attributes = BACKGROUND_GREEN;
-	buffer[5][101].Char.UnicodeChar = r;
-	buffer[5][101].Attributes = 0x0B;
-	buffer[5][102].Char.UnicodeChar = r;
-	buffer[5][102].Attributes = 0x0A;
+	// Change buffer here
+
+	int tile = -1;
+	for (int x = 0; x < t.Width(); x++)
+	{
+		for (int y = 0; y < t.Height(); y++)
+		{
+			//buffer[x][y] = mymap.at(t.GetTile(x, y));
+			buffer[x][y].Char.AsciiChar = t.GetTile(x, y)?'█':' ';
+		}
+	}
 
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
