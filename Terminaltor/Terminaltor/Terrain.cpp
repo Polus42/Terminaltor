@@ -1,7 +1,12 @@
 #include "Terrain.h"
 
-void Terrain::CreateInstance( int width, int height ) {
-	s_instance = Terrain( width, height );
+Terrain Terrain::s_instance;
+
+Terrain::Terrain() :
+m_width( 0 ),
+m_height( 0 ),
+m_slideOffset( 0 )
+{
 }
 
 Terrain::Terrain( const int width, const int height ) :
@@ -24,6 +29,15 @@ Terrain::~Terrain()
 		delete[] column;
 	}
 	delete[] m_tiles;
+}
+
+void Terrain::CreateInstance(int width, int height) {
+	if ( s_instance.Width() == 0 || s_instance.Height() == 0 )
+		s_instance = Terrain(width, height);
+}
+
+Terrain& Terrain::GetInstance() {
+	return s_instance;
 }
 
 void Terrain::Slide( const int distance) {

@@ -10,7 +10,7 @@ public:
 	inline int Width() { return m_width; }
 	inline int Height() { return m_height; }
 
-	virtual void Update( long delta_ms );
+	virtual void Update( long delta_ms ) {};
 
 protected:
 	int m_x;

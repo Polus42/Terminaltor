@@ -7,9 +7,14 @@ enum tile_t {
 
 class Terrain
 {
+private:
+	Terrain();
+	Terrain( int width, int height );
+	~Terrain();
+
 public:
 	static void CreateInstance( int width, int height );
-	inline static Terrain& GetInstance() { return s_instance; };
+	static Terrain& GetInstance();
 
 	void Slide( const int distance );
 	void Generate( const int distance );
@@ -20,10 +25,7 @@ public:
 
 	int GetTile( const int x, const int y );//function must be called with a positive value inferior to terrain width
 
-private:
-	Terrain( int width, int height );
-	~Terrain();
-
+protected:
 	static Terrain s_instance;
 
 	int m_width;
