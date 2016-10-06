@@ -1,5 +1,6 @@
 #pragma once
-#include "GameObject.h"
+#include "Character.h"
+#include <list>
 
 #define MIN_HEIGHT 5
 #define MAX_HEIGHT 15
@@ -20,6 +21,10 @@ public:
 
 	void Slide( const int distance );
 	inline int Distance() { return m_distance; }
+	inline void SetCharacter(Character& character) { m_character = character; }
+	inline Character& GetCharacter() { return m_character; }
+	inline void AddEnnemy(Character& character) { m_ennemies.push_back(character); }
+	inline std::list<Character>& GetEnnemies() { return m_ennemies; }
 
 	int GetTile( const int x, const int y );//function must be called with a positive value inferior to terrain width
 
@@ -31,8 +36,9 @@ protected:
 
 	int** m_tiles;
 	int m_columnOffset;
-
 	int m_distance;
-
 	int m_lastGroundHeight;
+
+	Character m_character;
+	std::list<Character> m_ennemies;
 };
