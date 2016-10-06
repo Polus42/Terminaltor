@@ -10,6 +10,7 @@
 #include "QuitCommand.h"
 #include "GoRightCommand.h"
 #include "GoLeftCommand.h"
+#include "JumpCommand.h"
 #include "GameState.h"
 
 int main(int argc, char *argv[])
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
 	int previous = 0;
 	int current = t->getElapsedMs();
 	int buffer = 0;
-	int delay = 33;
+	int delay = 500;
 	int keysMask = 0;
 	
 	//Creation terrrain
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
 	// Assigning each key a command
 	input->setEscape(new QuitCommand());
 	input->setKeyRight(new GoRightCommand(c, &Terrain::GetInstance()));
+	input->setKeySpace(new JumpCommand(c));
 	input->setKeyLeft(new GoLeftCommand(c, &Terrain::GetInstance()));
 
 	// Boucle affichage

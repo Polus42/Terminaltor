@@ -89,12 +89,20 @@ void Affichage::drawHud(Terrain& t)
 		buffer[1][t.Width() + i-str.length()-1].Attributes = 0x0005 | BACKGROUND_BLUE;
 	}
 
-	int x = t.GetCharacter().Y();
-	str = "Y : " + std::to_string(x);
+	int y = t.GetCharacter().Y();
+	str = "Y : " + std::to_string(y);
 	for (int i = 0; i < str.length(); i++)
 	{
 		buffer[2][t.Width() + i - str.length() - 1].Char.UnicodeChar = str[i];
 		buffer[2][t.Width() + i - str.length() - 1].Attributes = 0x0005 | BACKGROUND_BLUE;
+	}
+
+	int floor = t.GetCharacter().IsOnFloor();
+	str = "Floor : " + std::to_string(floor);
+	for (int i = 0; i < str.length(); i++)
+	{
+		buffer[3][t.Width() + i - str.length() - 1].Char.UnicodeChar = str[i];
+		buffer[3][t.Width() + i - str.length() - 1].Attributes = 0x0005 | BACKGROUND_BLUE;
 	}
 }
 
