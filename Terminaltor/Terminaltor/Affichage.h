@@ -3,9 +3,6 @@
 #include <windows.h>
 #include <map>
 
-typedef struct cezcv {
-
-} lenomdemastruct;
 
 class Affichage
 {
@@ -38,10 +35,7 @@ private:
 
 	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 
-	//std::map<const int, CHAR_INFO> mymap = {
-	//	{ 0, CHAR_INFO((0x0860), (0x0B)) },
-	//	{ 1, buffer[0][0] },
-	//	{ 2, buffer[0][0] } };
+	std::map<const int, CHAR_INFO> tileMap;
 
 };
 
