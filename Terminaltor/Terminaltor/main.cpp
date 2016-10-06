@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	int previous = 0;
 	int current = t->getElapsedMs();
 	int buffer = 0;
-	int delay = 500;
+	int delay = 33;
 	int keysMask = 0;
 	
 	//Creation terrrain

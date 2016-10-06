@@ -33,7 +33,7 @@ Affichage::Affichage()
 	tileMap.insert(std::pair<const int, CHAR_INFO>(3, *tile));
 	// Background
 	tile->Attributes = BACKGROUND_RED;
-	tile->Char.UnicodeChar = 0x20;
+	tile->Char.UnicodeChar = 178;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(4, *tile));
 	///////////////////////////////////////////////////////////////////////////
 	delete tile;
@@ -46,6 +46,17 @@ Affichage::~Affichage()
 
 void Affichage::draw( Terrain& t )
 {
+	int matrice[25][80] = {
+		{ 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+		{ 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+		{ 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+		{ 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+		{ 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+		{ 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+		{ 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+		{ 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1 }
+	};
+
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
 	
@@ -65,10 +76,10 @@ void Affichage::draw( Terrain& t )
 			{
 				buffer[t.Height() - y - 1][x] = tileMap.at(t.GetTile(x * 100 + t.Distance(), y * 100));
 				//IF AIR AND PARALLAX
-				//if (buffer[t.Height() - y - 1][x].Char.UnicodeChar == 0x20)
-				//{
-				//	buffer[t.Height() - y - 1][x].Attributes = BACKGROUND_RED;
-				//}
+				if (buffer[t.Height() - y - 1][x].Char.UnicodeChar == 0xdb && matrice[y][x+1])
+				{
+					buffer[t.Height() - y - 1][x] = tileMap.at(4);
+				}
 			}
 		}
 	}
