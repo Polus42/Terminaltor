@@ -4,7 +4,7 @@
 class JumpCommand : public Command
 {
 public:
-	JumpCommand();
+	JumpCommand(Character* character);
 	~JumpCommand();
 	virtual void execute();
 private:

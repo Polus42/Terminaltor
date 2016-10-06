@@ -23,11 +23,13 @@ Character::~Character()
 
 void Character::Move( int direction ) {
 	if (direction < 0) {
-		if (m_x > Terrain::GetInstance().Distance() + 1)
-			m_xSpeed = -WALK_SPEED;
+		if ( m_x > Terrain::GetInstance().Distance() + 100 )
+			m_xSpeed -= WALK_SPEED;
+		else
+			m_xSpeed = 0;
 	}
 	else if (direction > 0) {
-		m_xSpeed = WALK_SPEED;
+		m_xSpeed += WALK_SPEED;
 	}
 	else{
 		m_xSpeed = 0;
@@ -58,19 +60,32 @@ void Character::Update( long delta_ms ) {
 			m_y += 100;
 		}
 	}
+	{
+		Terrain& terrain = Terrain::GetInstance();
+		int dX = terrain.Distance() + (terrain.Width()*100) / 3;
+		if (m_x >= dX)
+			terrain.Slide(m_x-dX);
+	}
 	
-	int testY = (m_ySpeed > 0) ? m_y + m_height : m_y;
+	int testY = (m_ySpeed > 0) ? m_y-100 + m_height : m_y;
 	if ( terrain.GetTile( m_x, testY ) != 0 ) {
 		m_y /= 100;
+		m_y++;
 		m_y *= 100;
 		if ( m_ySpeed <= 0 )
 			m_onFLoor = true;
 		m_ySpeed = 0;
 	}
+	else {
+		if (m_ySpeed <= 0)
+			m_onFLoor = false;
+	}
 	if (!m_onFLoor) {
 		m_y += ( m_ySpeed * delta_ms ) / 1000;
-		m_ySpeed -= ( 981 * delta_ms ) / 1000;
+		m_ySpeed -= ( 98100 * delta_ms ) / 1000;
 	}
+
+	m_xSpeed = 0;
 }
 
 int Character::GetHealth()

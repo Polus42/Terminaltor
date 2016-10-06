@@ -15,6 +15,6 @@ GoRightCommand::~GoRightCommand()
 
 void GoRightCommand::execute()
 {
-	//character->Move(1);
-	terrain->Slide(1);
+	character->Move(1);
+	//terrain->Slide(1);
 }

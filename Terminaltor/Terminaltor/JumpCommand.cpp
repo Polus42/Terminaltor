@@ -1,7 +1,8 @@
 #include "JumpCommand.h"
 
 
-JumpCommand::JumpCommand()
+JumpCommand::JumpCommand(Character* character) :
+c(character)
 {
 }
 
