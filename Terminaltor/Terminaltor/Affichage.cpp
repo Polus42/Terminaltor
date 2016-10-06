@@ -30,9 +30,7 @@ void Affichage::draw( Terrain& t )
 	{
 		for (int y = 0; y < t.Height(); y++)
 		{
-			//buffer[x][y] = mymap.at(t.GetTile(x, y));
-			int coucou = t.GetTile(x * 100 + t.Distance(), y * 100);
-			buffer[y][x].Char.UnicodeChar = coucou ? '█' : ' ';
+			buffer[t.Height() - y - 1][x].Char.UnicodeChar = t.GetTile(x * 100 + t.Distance(), y * 100) ? 0x20 : 0xdb;
 		}
 	}
 
