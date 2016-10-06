@@ -80,7 +80,7 @@ void Affichage::draw( Terrain& t )
 			{
 				buffer[t.Height() - y - 1][x] = tileMap.at(t.GetTile(x * 100 + t.Distance(), y * 100));
 				//IF AIR AND PARALLAX
-				if (buffer[t.Height() - y - 1][x].Char.UnicodeChar == 0xdb && matrice[y][(x+t.Distance())%80])
+				if (buffer[t.Height() - y - 1][x].Char.UnicodeChar == 0xdb && matrice[y][(x+t.Distance()/2)%80])
 				{
 					buffer[t.Height() - y - 1][x] = tileMap.at(4);
 				}
