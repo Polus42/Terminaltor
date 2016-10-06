@@ -1,7 +1,10 @@
 #include "Sprite.h"
 #include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <windows.h>
 
-Sprite::Sprite( int width, int height, Tile *data ) :
+Sprite::Sprite(int width, int height, Tile *data) :
 m_width(width),
 m_height(height),
 m_data(data)
@@ -38,4 +41,44 @@ void Sprite::draw() {
 
 	// Keep users happy
 	SetConsoleTextAttribute(hstdout, csbi.wAttributes);
+}
+
+void Sprite::LoadSprite(const char* path, Sprite& dest) {
+	std::ifstream is(path, std::ifstream::binary);
+	if (is) {
+		// get length of file:
+		is.seekg(0, is.end);
+		int length = is.tellg();
+		is.seekg(0, is.beg);
+
+		char * buffer = new char[length];
+
+		std::cout << "Reading " << length << " characters... " << std::endl;
+		// read data as a block:
+		is.read(buffer, length);
+
+		if (is)
+			std::cout << "all characters read successfully." << std::endl;
+		else
+			std::cout << "error: only " << is.gcount() << " could be read";
+		is.close();
+
+		char width = buffer[0];
+		char height = buffer[1];
+
+		Tile *data = new Tile[width*height];
+
+		for (int i = 0; i < width*height; ++i) {
+			int t = i * 2 + 2;
+			int colors = buffer[t];
+			data[i].setAttributes(buffer[t + 1], colors);
+		}
+		delete dest.m_data;
+
+		dest.m_width = width;
+		dest.m_height = height;
+		dest.m_data = data;
+
+		delete[] buffer;
+	}
 }

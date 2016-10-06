@@ -5,7 +5,7 @@
 class Sprite
 {
 public:
-	Sprite( int width, int height, Tile *data );
+	Sprite(int width, int height, Tile *data);
 	~Sprite();
 
 	void draw();
@@ -13,7 +13,11 @@ public:
 	inline int Width() { return m_width; }
 	inline int Height() { return m_height; }
 
+	static void LoadSprite(const char* path, Sprite& dest);
+
 private:
+	Sprite();
+
 	int m_width;
 	int m_height;
 	Tile *m_data;

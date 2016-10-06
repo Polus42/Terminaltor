@@ -5,8 +5,7 @@
 Terrain Terrain::s_instance;
 
 Terrain::Terrain() :
-m_width( 0 ),
-m_height( 0 ),
+GameObject(0, 0, 0, 0),
 m_columnOffset( 0 ),
 m_distance( 0 )
 {
@@ -71,4 +70,7 @@ void Terrain::Generate( const int offset ) {
 			m_tiles[column_index][j] = j < m_lastGroundHeight ? 1 : 0;
 		}
 	}
+}
+
+void Terrain::Update(long delta_ms) {
 }

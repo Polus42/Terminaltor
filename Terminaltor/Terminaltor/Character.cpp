@@ -14,7 +14,18 @@ Character::~Character()
 }
 
 void Character::Move( int direction ) {
-	m_ySpeed = direction<0 ? -WALK_SPEED : WALK_SPEED;
+	if (direction < 0) {
+		if (m_x > Terrain::GetInstance().Distance() + 1)
+			m_xSpeed = -WALK_SPEED;
+	}
+	else if (direction > 0) {
+		m_xSpeed = WALK_SPEED;
+	}
+	else{
+		m_xSpeed = 0;
+	}
+	
+
 }
 
 void Character::Jump() {
