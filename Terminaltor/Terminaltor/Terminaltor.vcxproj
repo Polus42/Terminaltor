@@ -95,6 +95,10 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Sprites\character" />
+    <None Include="Sprites\tree" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
