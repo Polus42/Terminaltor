@@ -12,5 +12,5 @@ QuitCommand::~QuitCommand()
 
 void QuitCommand::execute()
 {
-	FreeConsole();
+	exit(0);
 }
