@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
 	//Initialisation gamestate
 	GameState::SetState(STATE_PLAYING);
 	//Creation character
-	Character *c = new Character(0, 0, 50, 180, 100);
+	Character *c = new Character(100, MAX_HEIGHT, 50, 180, 100);
+	Terrain::GetInstance().SetCharacter(*c);
 	//Creation input handler
 	InputHandler *input = new InputHandler(Terrain::GetInstance(),*c);
 	// Assigning each key a command

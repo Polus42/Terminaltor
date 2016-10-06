@@ -1,4 +1,5 @@
 #include "Terrain.h"
+#include "GameState.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -74,7 +75,11 @@ void Terrain::Generate( const int offset ) {
 }
 
 void Terrain::Update(long delta_ms) {
-
+	m_character.Update(delta_ms);
+	if ( m_character.GetHealth() ) {
+		GameState::SetState(STATE_PLAYER_DEAD);
+		return;
+	}
 	for (std::list<Character>::iterator it = m_ennemies.begin(); it != m_ennemies.end();) {
 		it->Update( delta_ms );
 		if (!it->GetHealth()) {
