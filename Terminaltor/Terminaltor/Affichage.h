@@ -23,7 +23,7 @@ public:
 	*/
 	void draw(Terrain& t);
 	void drawHud(Terrain& t);
-	void drawCharacter(Character c);
+	void drawCharacter(Character& c);
 private:
 	// Taille de l'écran
 	const static int SCREEN_WIDTH = 80;

@@ -27,6 +27,10 @@ Affichage::Affichage()
 	tile->Attributes = BACKGROUND_GREEN;
 	tile->Char.UnicodeChar = 0x20;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(2, *tile));
+	// Character
+	tile->Attributes = BACKGROUND_RED;
+	tile->Char.UnicodeChar = 0x20;
+	tileMap.insert(std::pair<const int, CHAR_INFO>(3, *tile));
 	///////////////////////////////////////////////////////////////////////////
 	delete tile;
 }
@@ -62,6 +66,7 @@ void Affichage::draw( Terrain& t )
 	}
 
 	drawHud(t);
+	drawCharacter(t.GetCharacter());
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
 }
@@ -85,7 +90,8 @@ void Affichage::drawHud(Terrain& t)
 	}
 }
 
-void Affichage::drawCharacter(Character c)
+void Affichage::drawCharacter(Character& c)
 {
-
+	buffer[Terrain::GetInstance().Height()-1-c.Y() / 100][c.X() / 100] = tileMap.at(3);
+	buffer[Terrain::GetInstance().Height() - 1 - (c.Y() + 100) / 100][c.X() / 100] = tileMap.at(3);
 }
