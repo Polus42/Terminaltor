@@ -60,7 +60,7 @@ void Affichage::draw( Terrain& t )
 			}
 		}
 	}
-	
+
 	drawHud(t);
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
@@ -83,4 +83,9 @@ void Affichage::drawHud(Terrain& t)
 		buffer[1][t.Width()+i-str.length()-1].Char.UnicodeChar = str[i];
 		buffer[1][t.Width() + i-str.length()-1].Attributes = 0x0005 | BACKGROUND_BLUE;
 	}
+}
+
+void Affichage::drawCharacter(Character c)
+{
+
 }
