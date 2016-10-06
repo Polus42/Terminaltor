@@ -15,6 +15,8 @@ public:
 
 	void Move( int direction );
 	void Jump();
+	
+	int GetHealth();
 
 	inline bool IsOnFloor() { return m_onFLoor; };
 

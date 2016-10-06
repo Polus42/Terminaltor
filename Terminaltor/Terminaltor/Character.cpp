@@ -64,3 +64,8 @@ void Character::Update( long delta_ms ) {
 		m_ySpeed -= ( 981 * delta_ms ) / 1000;
 	}
 }
+
+int Character::GetHealth()
+{
+	return m_health;
+}

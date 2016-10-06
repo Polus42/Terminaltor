@@ -1,5 +1,6 @@
 #pragma once
 
+#define STATE_MENU 2
 #define STATE_PLAYING 1
 #define STATE_EXIT 0
 

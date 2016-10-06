@@ -7,7 +7,7 @@
 class Affichage
 {
 public:
-	Affichage(int width, int height);
+	Affichage();
 	~Affichage();
 	/*Prends un buffer en param
 	Un buffer est une structure :
@@ -22,6 +22,7 @@ public:
 
 	*/
 	void draw(Terrain& t);
+	void drawHud(Terrain& t);
 private:
 	// Taille de l'écran
 	const static int SCREEN_WIDTH = 80;

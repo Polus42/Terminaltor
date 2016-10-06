@@ -9,13 +9,12 @@
 #include "InputHandler.h"
 #include "QuitCommand.h"
 #include "GoRightCommand.h"
+#include "GoLeftCommand.h"
 #include "GameState.h"
-
-#define RIGHT_KEY 0x0001
 
 int main(int argc, char *argv[])
 {
-	Affichage *aff = new Affichage(80, 25);
+	Affichage *aff = new Affichage();
 	NYTimer *t = new NYTimer();
 	t->start();
 	int previous = 0;
@@ -35,6 +34,7 @@ int main(int argc, char *argv[])
 	// Assigning each key a command
 	input->setEscape(new QuitCommand(gs));
 	input->setKeyRight(new GoRightCommand(c, &Terrain::GetInstance()));
+	input->setKeyLeft(new GoLeftCommand(c, &Terrain::GetInstance()));
 
 	// Boucle affichage
 	while (gs->State())
@@ -48,6 +48,19 @@ int main(int argc, char *argv[])
 			// Update physics and input here
 			/////////////////////////////////////////
 			input->handleInput();
+			switch (gs->State())
+			{
+			case 1:
+				// Playing
+				//Terrain::GetInstance().update();
+				break;
+			case 2:
+				// Menu
+				
+				break;
+			default:
+				break;
+			}
 		}
 		/////////////////////////////////////////
 		// Update drawing here

@@ -1,9 +1,9 @@
 ﻿#include "Affichage.h"
 #include "iostream"
 #include "Terrain.h"
+#include <string>
 
-
-Affichage::Affichage(int width , int height)
+Affichage::Affichage()
 {
 	//SCREEN_WIDTH = width;
 	//SCREEN_HEIGHT = height;
@@ -23,6 +23,10 @@ Affichage::Affichage(int width , int height)
 	// Air
 	tile->Char.UnicodeChar = 0x20;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(1, *tile));
+	// Borders
+	tile->Attributes = BACKGROUND_GREEN;
+	tile->Char.UnicodeChar = 0x20;
+	tileMap.insert(std::pair<const int, CHAR_INFO>(2, *tile));
 	///////////////////////////////////////////////////////////////////////////
 	delete tile;
 }
@@ -43,12 +47,37 @@ void Affichage::draw( Terrain& t )
 	{
 		for (int y = 0; y < t.Height(); y++)
 		{
-			//buffer[x][y] = mymap.at(t.GetTile(x, y));
-			//buffer[t.Height()-y-1][x].Char.UnicodeChar = t.GetTile(x * 100 + t.Distance(), y * 100) ? 0x20 : 0xdb;
-			buffer[t.Height() - y - 1][x] = tileMap.at(t.GetTile(x * 100 + t.Distance(), y * 100));
+			if (x == 0 || y == 0 || y==t.Height()-1|| x==t.Width()-1)
+			{
+				buffer[t.Height() - y - 1][x] = tileMap.at(2);
+			}
+			else
+			{
+				buffer[t.Height() - y - 1][x] = tileMap.at(t.GetTile(x * 100 + t.Distance(), y * 100));
+			}
 		}
 	}
 
+	drawHud(t);
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
+}
+
+void Affichage::drawHud(Terrain& t)
+{
+	int dist = t.Distance()/100;
+	std::string str = std::to_string(dist)+" METERS";
+	for (int i = 0; i < str.length(); i++)
+	{
+		buffer[1][i+1].Char.UnicodeChar = str[i];
+		buffer[1][i+1].Attributes = 0x0005 | BACKGROUND_BLUE;
+	}
+
+	int life = t.GetCharacter().GetHealth();
+	str = "LIFE : " + std::to_string(life);
+	for (int i = 0; i < str.length(); i++)
+	{
+		buffer[1][0].Char.UnicodeChar = str[i];
+		buffer[1][0].Attributes = 0x0005 | BACKGROUND_BLUE;
+	}
 }
