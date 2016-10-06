@@ -15,6 +15,7 @@
 
 int main(int argc, char *argv[])
 {
+	//commentaire inutile
 	Affichage *aff = new Affichage();
 	NYTimer *t = new NYTimer();
 	t->start();
