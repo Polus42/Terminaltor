@@ -4,10 +4,10 @@ GameObject::GameObject( int x, int y, int width, int height ) :
 m_x( x ),
 m_y( y ),
 m_width( width ),
-m_height( height )
+m_height( height ),
+m_sprite()
 {
 }
-
 
 GameObject::~GameObject()
 {

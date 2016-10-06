@@ -11,7 +11,8 @@ public:
 	inline int Y() { return m_y; }
 	inline int Width() { return m_width; }
 	inline int Height() { return m_height; }
-	inline int Sprite() { return m_sprite; }
+	inline Sprite& GetSprite() { return m_sprite; }
+	inline void SetSprite(Sprite& sprite) { m_sprite = sprite; }
 
 	virtual void Update( long delta_ms ) {};
 
