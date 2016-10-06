@@ -9,6 +9,7 @@ GameObject(0, 0, 0, 0),
 m_columnOffset( 0 ),
 m_distance( 0 )
 {
+	m_ennemies = std::list<Character>(10);
 }
 
 Terrain::~Terrain()
@@ -73,4 +74,5 @@ void Terrain::Generate( const int offset ) {
 }
 
 void Terrain::Update(long delta_ms) {
+	//for (auto itr = m_ennemies.begin())
 }

@@ -1,6 +1,14 @@
 #include "Character.h"
 #include "Terrain.h"
 
+Character::Character() :
+GameObject(),
+m_xSpeed( 0 ),
+m_ySpeed( 0 ),
+m_health( 0 )
+{
+}
+
 Character::Character( int x, int y, int width, int height, int health ) :
 GameObject( x, y, width, height ),
 m_xSpeed( 0 ),

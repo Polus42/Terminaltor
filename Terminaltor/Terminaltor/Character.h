@@ -8,6 +8,7 @@ class Character :
 	public GameObject
 {
 public:
+	Character();
 	Character( int x, int y, int width, int height, int health );
 	~Character();
 

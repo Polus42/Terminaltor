@@ -4,6 +4,7 @@
 class GameObject
 {
 public:
+	GameObject();
 	GameObject( int x, int y, int width, int height );
 	~GameObject();
 
