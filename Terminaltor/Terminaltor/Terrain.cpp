@@ -75,8 +75,8 @@ void Terrain::Generate( const int offset ) {
 }
 
 void Terrain::Update(long delta_ms) {
-	m_character.Update(delta_ms);
-	if ( !m_character.GetHealth() ) {
+	m_character->Update(delta_ms);
+	if ( !m_character->GetHealth() ) {
 		GameState::SetState(STATE_PLAYER_DEAD);
 		return;
 	}

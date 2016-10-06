@@ -21,8 +21,8 @@ public:
 
 	void Slide( const int distance );
 	inline int Distance() { return m_distance; }
-	inline void SetCharacter(Character& character) { m_character = character; }
-	inline Character& GetCharacter() { return m_character; }
+	inline void SetCharacter(Character* character) { m_character = character; }
+	inline Character& GetCharacter() { return *m_character; }
 	inline void AddEnnemy(Character& character) { m_ennemies.push_back(character); }
 	inline std::list<Character>& GetEnnemies() { return m_ennemies; }
 
@@ -39,6 +39,6 @@ protected:
 	int m_distance;
 	int m_lastGroundHeight;
 
-	Character m_character;
+	Character* m_character;
 	std::list<Character> m_ennemies;
 };

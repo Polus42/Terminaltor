@@ -48,6 +48,7 @@ void Character::Jump() {
 
 void Character::Update( long delta_ms ) {
 	Terrain& terrain = Terrain::GetInstance();
+	int oldX = m_x;
 	
 	int testX = (m_xSpeed > 0) ? m_x + m_width : m_x;
 	if ( terrain.GetTile(testX, m_y) != 0 ) {
@@ -61,16 +62,18 @@ void Character::Update( long delta_ms ) {
 		}
 	}
 	{
+		m_x += (m_xSpeed * delta_ms) / 1000;
+	}
+	{
 		Terrain& terrain = Terrain::GetInstance();
 		int dX = terrain.Distance() + (terrain.Width()*100) / 3;
 		if (m_x >= dX)
-			terrain.Slide(m_x-dX);
+			terrain.Slide(m_x-oldX);
 	}
 	
-	int testY = (m_ySpeed > 0) ? m_y-100 + m_height : m_y;
+	int testY = (m_ySpeed > 0) ? m_y + m_height : m_y - 100;
 	if ( terrain.GetTile( m_x, testY ) != 0 ) {
 		m_y /= 100;
-		m_y++;
 		m_y *= 100;
 		if ( m_ySpeed <= 0 )
 			m_onFLoor = true;
@@ -82,7 +85,7 @@ void Character::Update( long delta_ms ) {
 	}
 	if (!m_onFLoor) {
 		m_y += ( m_ySpeed * delta_ms ) / 1000;
-		m_ySpeed -= ( 98100 * delta_ms ) / 1000;
+		m_ySpeed -= ( 100000 * delta_ms ) / 1000;
 	}
 
 	m_xSpeed = 0;
