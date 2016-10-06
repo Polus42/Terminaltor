@@ -1,8 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
-#define JUMP_SPEED 200
-#define WALK_SPEED 500
+#define JUMP_SPEED 7500
+#define WALK_SPEED 25000
 
 class Character :
 	public GameObject
@@ -20,6 +20,8 @@ public:
 	int GetHealth();
 
 	inline bool IsOnFloor() { return m_onFLoor; };
+	inline int XSpeed() { return m_xSpeed; };
+	inline int YSpeed() { return m_ySpeed; };
 
 protected:
 

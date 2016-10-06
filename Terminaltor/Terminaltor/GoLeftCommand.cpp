@@ -14,6 +14,6 @@ GoLeftCommand::~GoLeftCommand()
 
 void GoLeftCommand::execute()
 {
-	//character->Move(-1);
-	terrain->Slide(1);
+	character->Move(-1);
+	//terrain->Slide(1);
 }

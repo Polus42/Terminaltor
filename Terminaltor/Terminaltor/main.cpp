@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	int previous = 0;
 	int current = t->getElapsedMs();
 	int buffer = 0;
-	int delay = 500;
+	int delay = 33;
 	int keysMask = 0;
 	
 	//Creation terrrain
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	GameState::SetState(STATE_PLAYING);
 	//Creation character
 	Character *c = new Character(100, MAX_HEIGHT*100, 50, 180, 100);
-	Terrain::GetInstance().SetCharacter(*c);
+	Terrain::GetInstance().SetCharacter(c);
 	//Creation input handler
 	InputHandler *input = new InputHandler(Terrain::GetInstance(),*c);
 	// Assigning each key a command
