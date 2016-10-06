@@ -1,8 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
-#define JUMP_SPEED 7500
-#define WALK_SPEED 25000
+#define JUMP_SPEED 25000
+#define WALK_SPEED 15000
 
 class Character :
 	public GameObject
