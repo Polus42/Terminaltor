@@ -31,6 +31,10 @@ Affichage::Affichage()
 	tile->Attributes = BACKGROUND_RED;
 	tile->Char.UnicodeChar = 0x20;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(3, *tile));
+	// Background
+	tile->Attributes = BACKGROUND_RED;
+	tile->Char.UnicodeChar = 0x20;
+	tileMap.insert(std::pair<const int, CHAR_INFO>(4, *tile));
 	///////////////////////////////////////////////////////////////////////////
 	delete tile;
 }
@@ -46,7 +50,6 @@ void Affichage::draw( Terrain& t )
 		dwBufferCoord, &rcRegion);
 	
 	// Change buffer here
-	// Drawing paralax
 	int offset = 10;
 
 	int tile = -1;
@@ -61,6 +64,11 @@ void Affichage::draw( Terrain& t )
 			else
 			{
 				buffer[t.Height() - y - 1][x] = tileMap.at(t.GetTile(x * 100 + t.Distance(), y * 100));
+				//IF AIR AND PARALLAX
+				//if (buffer[t.Height() - y - 1][x].Char.UnicodeChar == 0x20)
+				//{
+				//	buffer[t.Height() - y - 1][x].Attributes = BACKGROUND_RED;
+				//}
 			}
 		}
 	}
@@ -68,7 +76,7 @@ void Affichage::draw( Terrain& t )
 	drawHud(t);
 	drawCharacter(t.GetCharacter());
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
-		dwBufferCoord, &rcRegion);
+dwBufferCoord, &rcRegion);
 }
 
 void Affichage::drawHud(Terrain& t)
