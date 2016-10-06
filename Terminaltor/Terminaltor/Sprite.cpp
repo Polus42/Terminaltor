@@ -4,6 +4,13 @@
 #include <iomanip>
 #include <windows.h>
 
+Sprite::Sprite() :
+m_width(0),
+m_height(0),
+m_data(nullptr)
+{
+}
+
 Sprite::Sprite(int width, int height, Tile *data) :
 m_width(width),
 m_height(height),

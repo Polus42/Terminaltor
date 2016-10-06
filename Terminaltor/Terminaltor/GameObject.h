@@ -1,4 +1,6 @@
 #pragma once
+#include "Sprite.h"
+
 class GameObject
 {
 public:
@@ -9,6 +11,7 @@ public:
 	inline int Y() { return m_y; }
 	inline int Width() { return m_width; }
 	inline int Height() { return m_height; }
+	inline int Sprite() { return m_sprite; }
 
 	virtual void Update( long delta_ms ) {};
 
@@ -17,4 +20,6 @@ protected:
 	int m_y;
 	int m_width;
 	int m_height;
+
+	Sprite m_sprite;
 };
