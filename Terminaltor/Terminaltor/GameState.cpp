@@ -1,7 +1,8 @@
 #include "GameState.h"
 
-GameState::GameState() :
-m_state(STATE_PLAYING)
+int GameState::m_state;
+
+GameState::GameState()
 {
 }
 

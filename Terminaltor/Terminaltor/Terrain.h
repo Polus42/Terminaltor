@@ -13,11 +13,11 @@ private:
 	Terrain( int width, int height );
 	~Terrain();
 
-	void Update(long delta_ms) override;
-
 public:
 	static void ResizeInstance( int width, int height );
 	static Terrain& GetInstance();
+
+	void Update(long delta_ms) override;
 
 	void Slide( const int distance );
 	inline int Distance() { return m_distance; }

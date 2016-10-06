@@ -25,19 +25,19 @@ int main(int argc, char *argv[])
 	
 	//Creation terrrain
 	Terrain::ResizeInstance(80, 25);
-	//Creation gamestate
-	GameState *gs = new GameState();
+	//Initialisation gamestate
+	GameState::SetState(STATE_PLAYING);
 	//Creation character
 	Character *c = new Character(0, 0, 50, 180, 100);
 	//Creation input handler
 	InputHandler *input = new InputHandler(Terrain::GetInstance(),*c);
 	// Assigning each key a command
-	input->setEscape(new QuitCommand(gs));
+	input->setEscape(new QuitCommand());
 	input->setKeyRight(new GoRightCommand(c, &Terrain::GetInstance()));
 	input->setKeyLeft(new GoLeftCommand(c, &Terrain::GetInstance()));
 
 	// Boucle affichage
-	while (gs->State())
+	while (GameState::State())
 	{
 		previous = current;
 
@@ -48,15 +48,16 @@ int main(int argc, char *argv[])
 			// Update physics and input here
 			/////////////////////////////////////////
 			input->handleInput();
-			switch (gs->State())
+			switch (GameState::State())
 			{
-			case 1:
-				// Playing
-				//Terrain::GetInstance().update();
+			case STATE_PLAYING:
+				Terrain::GetInstance().Update(buffer);
 				break;
-			case 2:
-				// Menu
+			case STATE_MENU:
 				
+				break;
+			case STATE_PLAYER_DEAD:
+
 				break;
 			default:
 				break;

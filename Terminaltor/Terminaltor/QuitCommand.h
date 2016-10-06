@@ -5,11 +5,8 @@
 class QuitCommand : public Command
 {
 public:
-	QuitCommand(GameState* gameState);
+	QuitCommand();
 	~QuitCommand();
 	virtual void execute();
-
-private:
-	GameState* m_gameState;
 };
 

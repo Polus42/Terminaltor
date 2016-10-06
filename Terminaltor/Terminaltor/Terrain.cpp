@@ -74,5 +74,14 @@ void Terrain::Generate( const int offset ) {
 }
 
 void Terrain::Update(long delta_ms) {
-	//for (auto itr = m_ennemies.begin())
+
+	for (std::list<Character>::iterator it = m_ennemies.begin(); it != m_ennemies.end();) {
+		it->Update( delta_ms );
+		if (!it->GetHealth()) {
+			it = m_ennemies.erase(it);
+		}
+		else{
+			++it;
+		}
+	}
 }
