@@ -20,7 +20,7 @@ Affichage::Affichage()
 	// Ground
 	tile->Attributes = FOREGROUND_BLUE;
 	tile->Char.UnicodeChar = 0xdb;
-	tileMap.insert(std::pair<const int, CHAR_INFO>(0,*tile));
+	tileMap.insert(std::pair<const int, CHAR_INFO>(0, *tile));
 	// Air
 	tile->Char.UnicodeChar = 0x20;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(1, *tile));
@@ -47,7 +47,13 @@ Affichage::~Affichage()
 
 void Affichage::draw()
 {
+	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
+		dwBufferCoord, &rcRegion);
+
 	if (GameState::State() == STATE_MENU) {
+		drawMenu(*GameState::MainMenu());
+		WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
+			dwBufferCoord, &rcRegion);
 		return;
 	}
 	int matrice[25][80] = {
@@ -64,12 +70,6 @@ void Affichage::draw()
 		{ 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1 },
 		{ 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1 }
 	};
-
-	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
-		dwBufferCoord, &rcRegion);
-	
-	// Change buffer here
-	int offset = 10;
 
 	Terrain& t = Terrain::GetInstance();
 	int tile = -1;
@@ -96,8 +96,8 @@ void Affichage::draw()
 
 	drawHud(t);
 	drawCharacter(t.GetCharacter());
-	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
-dwBufferCoord, &rcRegion);
+	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize, 
+		dwBufferCoord, &rcRegion);
 }
 
 void Affichage::drawHud(Terrain& t)
@@ -133,6 +133,35 @@ void Affichage::drawHud(Terrain& t)
 		buffer[3][t.Width() + i - str.length() - 1].Char.UnicodeChar = str[i];
 		buffer[3][t.Width() + i - str.length() - 1].Attributes = 0x0005 | BACKGROUND_BLUE;
 	}//*/
+}
+
+void Affichage::drawMenu(Menu& m)
+{
+	CHAR_INFO *tile = new CHAR_INFO();
+	tile->Attributes = 0x00;
+	tile->Char.UnicodeChar = 0x20;
+	for (int x = 0; x < SCREEN_WIDTH; ++x)
+		for (int y = 0; y < SCREEN_HEIGHT; ++y)
+			buffer[y][x] = *tile;
+
+	int xOffset = SCREEN_WIDTH / 2 - m.ButtonsWidth() / 2;
+	int yOffset = 0;
+	int i = 0;
+	for (auto it = m.Buttons().begin(); it != m.Buttons().end(); ++it) {
+		tile->Attributes = m.Index() == i++ ? 0x0f : 0x07;
+		tile->Char.UnicodeChar = 0xc9;//top left corner
+		buffer[yOffset][xOffset] = *tile;
+		tile->Char.UnicodeChar = 0xbb;//top right corner
+		buffer[yOffset][xOffset + m.ButtonsWidth() - 1] = *tile;
+
+		yOffset++;
+		tile->Char.UnicodeChar = 0xc8;//bottom left corner
+		buffer[++yOffset][xOffset] = *tile;
+		tile->Char.UnicodeChar = 0xbc;//bottom right corner
+		buffer[yOffset++][xOffset + m.ButtonsWidth() - 1] = *tile;
+	}
+
+	delete tile;
 }
 
 void Affichage::drawCharacter(Character& c)
