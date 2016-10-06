@@ -48,11 +48,11 @@ Terrain& Terrain::GetInstance() {
 
 void Terrain::Slide( const int distance ) {
 	m_columnOffset += distance;
+	m_distance += distance;
 	if (m_columnOffset > 0) {
 		m_columnOffset -= m_width*100;
 		Generate(((m_distance / 100) / m_width) % 2 ? 0 : m_width);
 	}
-	m_distance += distance;
 }
 
 int Terrain::GetTile( const int x, const int y ) {

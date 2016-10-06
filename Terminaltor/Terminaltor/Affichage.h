@@ -21,7 +21,7 @@ public:
 	} CHAR_INFO, *PCHAR_INFO;
 
 	*/
-	void draw(Terrain& t);
+	void draw();
 	void drawHud(Terrain& t);
 	void drawCharacter(Character& c);
 private:

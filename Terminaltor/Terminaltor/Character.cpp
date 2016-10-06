@@ -34,8 +34,6 @@ void Character::Move( int direction ) {
 	else{
 		m_xSpeed = 0;
 	}
-	
-
 }
 
 void Character::Jump() {
@@ -67,16 +65,20 @@ void Character::Update( long delta_ms ) {
 	{
 		Terrain& terrain = Terrain::GetInstance();
 		int dX = terrain.Distance() + ((terrain.Width()*100) / 3);
+		//*
 		if (m_x >= dX)
-			terrain.Slide(m_x - dX);
+			terrain.Slide(m_x - dX);//*/
 	}
 	
 	int testY = (m_ySpeed > 0) ? m_y + m_height : m_y - 100;
 	if ( terrain.GetTile( m_x, testY ) != 0 ) {
 		m_y /= 100;
 		m_y *= 100;
-		if ( m_ySpeed <= 0 )
-			m_onFLoor = true;
+		if (m_ySpeed <= 0) {
+			m_onFLoor = true;/*
+			if ( terrain.GetTile( m_x, m_y ) != 0 )
+				m_y += 100;//*/
+		}
 		m_ySpeed = 0;
 	}
 	else {

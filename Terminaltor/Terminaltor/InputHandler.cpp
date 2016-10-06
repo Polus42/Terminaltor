@@ -2,7 +2,7 @@
 #include "windows.h"
 #include "Command.h"
 
-InputHandler::InputHandler(Terrain& t,Character& c)
+InputHandler::InputHandler()
 {
 }
 
@@ -17,6 +17,10 @@ void InputHandler::handleInput()
 	{
 		key_escape->execute();
 	}
+	if (GetAsyncKeyState(VK_RETURN) && key_enter)
+	{
+		key_enter->execute();
+	}
 	if (GetAsyncKeyState(VK_SPACE) && key_space)
 	{
 		key_space->execute();
@@ -29,22 +33,22 @@ void InputHandler::handleInput()
 	{
 		key_down->execute();
 	}
-
 	if (GetAsyncKeyState(VK_RIGHT) && key_right)
 	{
 		key_right->execute();
 	}
-	else if (GetAsyncKeyState(VK_LEFT) && key_left)
+	if (GetAsyncKeyState(VK_LEFT) && key_left)
 	{
 		key_left->execute();
-	}
-	else {
-
 	}
 }
 void InputHandler::setEscape(Command* c)
 {
 	key_escape = c;
+}
+void InputHandler::setKeyEnter(Command* c)
+{
+	key_enter = c;
 }
 void InputHandler::setKeyDown(Command* c)
 {

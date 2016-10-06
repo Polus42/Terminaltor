@@ -1,12 +1,9 @@
 #include "GoLeftCommand.h"
 
-
-GoLeftCommand::GoLeftCommand(Character *c, Terrain* t)
+GoLeftCommand::GoLeftCommand(Character *c)
 {
 	character = c;
-	terrain = t;
 }
-
 
 GoLeftCommand::~GoLeftCommand()
 {
@@ -14,6 +11,7 @@ GoLeftCommand::~GoLeftCommand()
 
 void GoLeftCommand::execute()
 {
-	character->Move(-1);
-	//terrain->Slide(1);
+	//*
+	character->Move(-1);/*/
+	terrain->Slide(100);//*/
 }
