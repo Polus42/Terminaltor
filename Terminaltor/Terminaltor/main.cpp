@@ -9,6 +9,7 @@
 #include "InputHandler.h"
 #include "QuitCommand.h"
 #include "GoRightCommand.h"
+#include "GameState.h"
 
 #define RIGHT_KEY 0x0001
 
@@ -25,15 +26,18 @@ int main(int argc, char *argv[])
 	
 	//Creation terrrain
 	Terrain::ResizeInstance(80, 25);
+	//Creation gamestate
+	GameState *gs = new GameState();
 	//Creation character
-	Character *c = new Character(0,0,50,180,100);
+	Character *c = new Character(0, 0, 50, 180, 100);
+	//Creation input handler
 	InputHandler *input = new InputHandler(Terrain::GetInstance(),*c);
 	// Assigning each key a command
-	input->setEscape(new QuitCommand());
+	input->setEscape(new QuitCommand(gs));
 	input->setKeyRight(new GoRightCommand(c, &Terrain::GetInstance()));
 
 	// Boucle affichage
-	while (true)
+	while (gs->State())
 	{
 		previous = current;
 

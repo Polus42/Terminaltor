@@ -15,7 +15,6 @@ public:
 	static Terrain& GetInstance();
 
 	void Slide( const int distance );
-	void Generate( const int distance );
 
 	inline int Width() { return m_width; }
 	inline int Height() { return m_height; }
@@ -27,6 +26,7 @@ protected:
 	static Terrain s_instance;
 
 	void FreeTiles();
+	void Generate( const int offset );
 
 	int m_width;
 	int m_height;

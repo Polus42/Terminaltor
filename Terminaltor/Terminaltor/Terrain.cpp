@@ -37,7 +37,7 @@ void Terrain::ResizeInstance( int width, int height ) {
 		for ( int w = 0; w < width*2; ++w ){
 			s_instance.m_tiles[w] = new int[height];
 		}
-		s_instance.Generate(width);
+		s_instance.Generate(0);
 	}
 }
 
@@ -47,26 +47,28 @@ Terrain& Terrain::GetInstance() {
 
 void Terrain::Slide( const int distance ) {
 	m_columnOffset += distance;
-	if ( m_columnOffset > m_width )
+	if (m_columnOffset > 0) {
 		m_columnOffset -= m_width;
+		Generate(((m_distance / 100) / m_width) % 2 ? 0 : m_width);
+	}
 	m_distance += distance * 100;
-	Generate( distance );
 }
 
 int Terrain::GetTile( const int x, const int y ) {
-	int column_index = ( ( x - m_distance ) / 100 ) + m_columnOffset;
+	int column_index = ((x / 100) % (2 * m_width));
 	return m_tiles[column_index][y / 100];
 }
 
-void Terrain::Generate( const int distance ) {
-	for ( int i = m_width - distance + m_columnOffset; i < m_width + m_columnOffset; ++i ) {
+void Terrain::Generate( const int offset ) {
+	for ( int i = 0; i < m_width; ++i ) {
+		int column_index = i + offset;
 		m_lastGroundHeight += rand()%3 - 1;
 		if ( m_lastGroundHeight > MAX_HEIGHT )
 			m_lastGroundHeight = MAX_HEIGHT;
 		if ( m_lastGroundHeight < MIN_HEIGHT )
 			m_lastGroundHeight = MIN_HEIGHT;
 		for ( int j = 0; j < m_height; j++ ) {
-			m_tiles[i][j] = j < m_lastGroundHeight ? 1 : 0;
+			m_tiles[column_index][j] = j < m_lastGroundHeight ? 1 : 0;
 		}
 	}
 }

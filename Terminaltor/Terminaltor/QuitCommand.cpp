@@ -1,7 +1,8 @@
 #include "QuitCommand.h"
 #include "windows.h"
 
-QuitCommand::QuitCommand()
+QuitCommand::QuitCommand(GameState* gameState):
+m_gameState(gameState)
 {
 }
 
@@ -12,5 +13,5 @@ QuitCommand::~QuitCommand()
 
 void QuitCommand::execute()
 {
-	exit(0);
+	m_gameState->SetState(STATE_EXIT);
 }

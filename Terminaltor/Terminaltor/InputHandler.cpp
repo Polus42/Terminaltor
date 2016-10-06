@@ -1,6 +1,7 @@
 #include "InputHandler.h"
 #include "windows.h"
 #include "Command.h"
+
 InputHandler::InputHandler(Terrain& t,Character& c)
 {
 }
@@ -12,27 +13,27 @@ InputHandler::~InputHandler()
 
 void InputHandler::handleInput()
 {
-	if (GetAsyncKeyState(VK_ESCAPE))
+	if (GetAsyncKeyState(VK_ESCAPE) && key_escape)
 	{
 		key_escape->execute();
 	}
-	if (GetAsyncKeyState(VK_RIGHT))
+	if (GetAsyncKeyState(VK_RIGHT) && key_right)
 	{
 		key_right->execute();
 	}
-	if (GetAsyncKeyState(VK_SPACE))
+	if (GetAsyncKeyState(VK_SPACE) && key_space)
 	{
 		key_space->execute();
 	}
-	if (GetAsyncKeyState(VK_LEFT))
+	if (GetAsyncKeyState(VK_LEFT) && key_left)
 	{
 		key_left->execute();
 	}
-	if (GetAsyncKeyState(VK_UP))
+	if (GetAsyncKeyState(VK_UP) && key_up)
 	{
 		key_up->execute();
 	}
-	if (GetAsyncKeyState(VK_DOWN))
+	if (GetAsyncKeyState(VK_DOWN) && key_down)
 	{
 		key_down->execute();
 	}
