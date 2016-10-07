@@ -87,7 +87,7 @@ void Character::Update( float delta_ms ) {
 	}
 	if (!m_onFLoor) {
 		m_y += ( m_ySpeed * dT ) / 1000.0f;
-		m_ySpeed -= ( 1000000.0f * dT ) / 1000.0f;
+		m_ySpeed -= ( GRAVITY * dT ) / 1000.0f;
 	}
 
 	m_xSpeed = 0.0f;

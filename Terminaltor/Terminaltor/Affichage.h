@@ -25,7 +25,7 @@ public:
 	void draw();
 	void drawMenu(Menu& m);
 	void drawHud(Terrain& t);
-	void drawCharacter(Character& c);
+	void drawCharacter(Character* c);
 	void drawText( int y, int x, const std::string& str, WORD attributes );
 	void drawBackground();
 private:
