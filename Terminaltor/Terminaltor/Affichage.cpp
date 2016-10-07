@@ -172,7 +172,7 @@ void Affichage::drawMenu(Menu& m)
 
 		yOffset += gap * 2;
 	}
-
+	drawText(10, 10, "X", 0x20);
 	delete tile;
 }
 
@@ -189,9 +189,14 @@ void Affichage::drawCharacter(Character& c)
 void Affichage::LoadBackground(const char* path) {
 	std::ifstream infile(path);
 	std::string line;
+	int length = 0;
 	while (std::getline(infile, line))
 	{
-		std::cout << line << std::endl;
+		for (int i = 0; i < line.size(); i++)
+		{
+			background[length][i] = line.at(i);
+		}
+		length++;
 	}
 	
 }

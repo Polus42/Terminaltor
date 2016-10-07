@@ -79,9 +79,11 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuCommand.cpp" />
     <ClCompile Include="NYTimer.cpp" />
+    <ClCompile Include="ParentMenuCommand.cpp" />
     <ClCompile Include="PlayCommand.cpp" />
     <ClCompile Include="QuitCommand.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SubMenuCommand.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="UpCommand.cpp" />
@@ -103,9 +105,11 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuCommand.h" />
     <ClInclude Include="NYTimer.h" />
+    <ClInclude Include="ParentMenuCommand.h" />
     <ClInclude Include="PlayCommand.h" />
     <ClInclude Include="QuitCommand.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SubMenuCommand.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="UpCommand.h" />
