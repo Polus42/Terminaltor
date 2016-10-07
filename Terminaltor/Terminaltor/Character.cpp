@@ -75,7 +75,7 @@ void Character::Update( float delta_ms ) {
 		m_y /= 100.0f;
 		m_y *= 100.0f;
 		if (m_ySpeed <= 0.0f) {
-			m_onFLoor = true;/*
+			m_onFLoor = true;//*
 			if ( terrain.GetTile( m_x, m_y ) != 0 )
 				m_y += 100;//*/
 		}

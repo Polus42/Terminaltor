@@ -11,6 +11,6 @@ PlayCommand::~PlayCommand()
 
 void PlayCommand::execute()
 {
-	GameState::SetDelay(0.033f);
+	GameState::SetDelay(0.01666666f);
 	GameState::SetState(STATE_PLAYING);
 }
