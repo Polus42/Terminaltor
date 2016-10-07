@@ -4,8 +4,8 @@
 Bullet::Bullet( float x, float y ) :
 PhysicsObject( x, y, 50, 50 )
 {
-	m_xSpeed = 0;
-	m_ySpeed = BULLET_SPEED;
+	m_xSpeed = BULLET_SPEED;
+	m_ySpeed = 0;
 }
 
 Bullet::~Bullet()
