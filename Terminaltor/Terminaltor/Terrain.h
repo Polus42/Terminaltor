@@ -22,7 +22,7 @@ public:
 	void Slide( const float distance );
 	inline float Distance() { return m_distance; }
 	inline void SetCharacter(Character* character) { m_character = character; }
-	inline Character& GetCharacter() { return *m_character; }
+	inline Character* GetCharacter() { return m_character; }
 	inline void AddEnnemy(Character& character) { m_ennemies.push_back(character); }
 	inline std::list<Character>& GetEnnemies() { return m_ennemies; }
 

@@ -109,11 +109,11 @@ void Affichage::drawHud(Terrain& t)
 	std::string str = std::to_string(dist) + " METERS";
 	drawText(1, 1, str, 0x0005 | BACKGROUND_BLUE);
 
-	int life = t.GetCharacter().GetHealth();
+	int life = t.GetCharacter()->GetHealth();
 	str = "LIFE : " + std::to_string(life);
 	drawText(1, t.Width() - str.length() - 1, str, 0x0005 | BACKGROUND_BLUE);
 
-	int x = t.GetCharacter().X();
+	int x = t.GetCharacter()->X();
 	str = "CX : " + std::to_string(x);
 	drawText(2, t.Width() - str.length() - 1, str, 0x0005 | BACKGROUND_BLUE);
 	//*
@@ -176,14 +176,14 @@ void Affichage::drawMenu(Menu& m)
 	delete tile;
 }
 
-void Affichage::drawCharacter(Character& c)
+void Affichage::drawCharacter(Character* c)
 {
 	/*int tmp = c.X() - Terrain::GetInstance().Distance();
 	tmp -= tmp % 100;
 	tmp += Terrain::GetInstance().Distance() % 100;
 	tmp /= 100;*/
-	buffer[Terrain::GetInstance().Height() - 1 - (int)(c.Y() / 100)      ][(int)(c.X() - Terrain::GetInstance().Distance())/100] = tileMap.at(3);
-	buffer[Terrain::GetInstance().Height() - 1 - (int)(c.Y() + 100) / 100][(int)(c.X() - Terrain::GetInstance().Distance()) / 100] = tileMap.at(3);
+	buffer[Terrain::GetInstance().Height() - 1 - (int)(c->Y() / 100)      ][(int)(c->X() - Terrain::GetInstance().Distance()) / 100] = tileMap.at(3);
+	buffer[Terrain::GetInstance().Height() - 1 - (int)(c->Y() + 100) / 100][(int)(c->X() - Terrain::GetInstance().Distance()) / 100] = tileMap.at(3);
 }
 
 void Affichage::LoadBackground(const char* path) {

@@ -67,14 +67,13 @@ int main(int argc, char *argv[])
 	*menu << credits;
 
 	// Boucle affichage
+	aff->draw();
 	while (GameState::State())
 	{
 		if (buffer > GameState::Delay())
 		{
-
-			GameState::SetFps(1.0f/buffer);
-
-			buffer = buffer - GameState::Delay();
+			//GameState::SetFps(1.0f / buffer);
+			GameState::SetFps(buffer*1000000.f);//t->getElapsedSeconds()*1000000.0f
 			/////////////////////////////////////////
 			// Update physics and input here
 			/////////////////////////////////////////
@@ -93,11 +92,13 @@ int main(int argc, char *argv[])
 			default:
 				break;
 			}
+			buffer -= GameState::Delay();
+			aff->draw();
 		}
 		/////////////////////////////////////////
 		// Update drawing here
 		/////////////////////////////////////////
-		aff->draw();
+		//aff->draw();
 		/////////////////////////////////////////
 		buffer += t->getElapsedSeconds(true);
 	}
