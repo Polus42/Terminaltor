@@ -1,10 +1,15 @@
 #pragma once
-#include "GameObject.h"
+#include "PhysicsObject.h"
+
+#define BULLET_SPEED
+
 class Bullet :
-	public GameObject
+	public PhysicsObject
 {
 public:
 	Bullet( float x, float y );
 	~Bullet();
+
+	void Update(float delta_ms) override;
 };
 
