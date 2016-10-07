@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include <windows.h>
 #include <map>
+#include <string>
 
 class Affichage
 {
@@ -26,6 +27,7 @@ public:
 	void drawHud(Terrain& t);
 	void drawCharacter(Character& c);
 	void drawText( int y, int x, const std::string& str, WORD attributes );
+	void drawBackground();
 private:
 	// Taille de l'écran
 	const static int SCREEN_WIDTH = 80;
@@ -43,7 +45,7 @@ private:
 
 	void LoadBackground(const char* path);
 
-	char background[SCREEN_HEIGHT][SCREEN_WIDTH];
+	std::string background[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 };
 
