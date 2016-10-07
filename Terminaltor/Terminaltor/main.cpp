@@ -10,6 +10,8 @@
 #include "QuitCommand.h"
 #include "EnterCommand.h"
 #include "MenuCommand.h"
+#include "ParentMenuCommand.h"
+#include "SubMenuCommand.h"
 #include "UpCommand.h"
 #include "DownCommand.h"
 #include "GoRightCommand.h"
@@ -47,15 +49,24 @@ int main(int argc, char *argv[])
 
 	// Creating menu and buttons
 	Menu* menu = new Menu(20);
-	*menu << new Button(new PlayCommand(), "Play");
-	*menu << new Button(new PlayCommand(), "Credits");
-	*menu << new Button(new QuitCommand(), "Quit");
+	*menu << new Button(new PlayCommand(), "Play") << new Button(new SubMenuCommand(menu, 0), "Credits") << new Button(new QuitCommand(), "Quit");
 	GameState::SetMainMenu(menu);
-	//Creation menu input handler
 	//menu->setEscape(new QuitCommand());
 	menu->setKeyEnter(new EnterCommand(menu));
 	menu->setKeyUp(new UpCommand(menu));
 	menu->setKeyDown(new DownCommand(menu));
+
+	// Creating credits
+	Menu* credits = new Menu(20);
+	*credits << new Button(new QuitCommand(), "Coucou");
+	*credits << new Button(new QuitCommand(), "Bisou");
+	credits->setEscape(new ParentMenuCommand(credits));
+	credits->setKeyEnter(new EnterCommand(credits));
+	credits->setKeyUp(new UpCommand(credits));
+	credits->setKeyDown(new DownCommand(credits));
+	credits->SetParent(menu);
+
+	*menu << credits;
 
 	// Boucle affichage
 	while (GameState::State())
@@ -78,7 +89,7 @@ int main(int argc, char *argv[])
 				Terrain::GetInstance().Update(buffer);
 				break;
 			case STATE_MENU:
-				menu->handleInput();
+				GameState::MainMenu()->handleInput();
 				break;
 			case STATE_PLAYER_DEAD:
 

@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "GameState.h"
 
 Menu::Menu( int buttonsWidth ) :
 m_buttonsWidth( buttonsWidth ),
@@ -9,6 +10,18 @@ m_index( 0 )
 
 Menu::~Menu()
 {
+}
+
+void Menu::LoadParent()
+{
+	if ( m_parent )
+		GameState::SetMainMenu( m_parent );
+}
+
+void Menu::LoadChild( int index )
+{
+	if ( index < m_children.size() && m_children[index] )
+		GameState::SetMainMenu( m_children[index] );
 }
 
 void Menu::Down()

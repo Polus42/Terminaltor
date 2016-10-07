@@ -138,7 +138,8 @@ void Affichage::drawMenu(Menu& m)
 			buffer[y][x] = *tile;
 
 	int xOffset = SCREEN_WIDTH / 2 - m.ButtonsWidth() / 2;
-	int yOffset = 0;
+	int gap = (SCREEN_HEIGHT / m.Buttons().size() ) / 2 - 1;
+	int yOffset = gap;
 	int i = 0;
 	for (auto button : m.Buttons()) {
 		int highlight = m.Index() == i++;
@@ -164,7 +165,9 @@ void Affichage::drawMenu(Menu& m)
 		tile->Char.UnicodeChar = highlight ? 0xc8 : 0xc0;//bottom left corner
 		buffer[++yOffset][xOffset] = *tile;
 		tile->Char.UnicodeChar = highlight ? 0xbc : 0xd9;//bottom right corner
-		buffer[yOffset++][xOffset + m.ButtonsWidth() - 1] = *tile;
+		buffer[yOffset][xOffset + m.ButtonsWidth() - 1] = *tile;
+
+		yOffset += gap * 2;
 	}
 
 	delete tile;

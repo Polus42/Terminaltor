@@ -16,7 +16,7 @@ public:
 	static inline int Delay() { return m_delay; };
 	static inline void SetDelay(int delay) { m_delay = delay; };
 	static inline Menu* MainMenu() { return m_mainMenu; };
-	static inline void SetMainMenu(Menu* menu) { m_mainMenu = menu; };
+	static inline void SetMainMenu( Menu* menu ) { m_mainMenu = menu; };
 
 private:
 	GameState();
