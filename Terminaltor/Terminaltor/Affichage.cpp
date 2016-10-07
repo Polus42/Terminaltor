@@ -103,35 +103,28 @@ void Affichage::draw()
 void Affichage::drawHud(Terrain& t)
 {
 	int dist = t.Distance()/100;
-	std::string str = std::to_string(dist)+" METERS";
-	for (unsigned int i = 0; i < str.length(); i++)
-	{
-		buffer[1][i+1].Char.UnicodeChar = str[i];
-		buffer[1][i+1].Attributes = 0x0005 | BACKGROUND_BLUE;
-	}
+	std::string str = std::to_string(dist) + " METERS";
+	drawText(1, 1, str, 0x0005 | BACKGROUND_BLUE);
 
 	int life = t.GetCharacter().GetHealth();
 	str = "LIFE : " + std::to_string(life);
-	for (unsigned int i = 0; i < str.length(); i++)
-	{
-		buffer[1][t.Width()+i-str.length()-1].Char.UnicodeChar = str[i];
-		buffer[1][t.Width() + i-str.length()-1].Attributes = 0x0005 | BACKGROUND_BLUE;
-	}
+	drawText(1, t.Width() - str.length() - 1, str, 0x0005 | BACKGROUND_BLUE);
 
 	int x = t.GetCharacter().X();
 	str = "CX : " + std::to_string(x);
-	for (unsigned int i = 0; i < str.length(); i++)
-	{
-		buffer[2][t.Width() + i - str.length() - 1].Char.UnicodeChar = str[i];
-		buffer[2][t.Width() + i - str.length() - 1].Attributes = 0x0005 | BACKGROUND_BLUE;
-	}
+	drawText(2, t.Width() - str.length() - 1, str, 0x0005 | BACKGROUND_BLUE);
 	//*
 	int fps = GameState::Fps();
 	str = "fps : " + std::to_string(fps);
+	drawText(3, t.Width() - str.length() - 1, str, 0x0005 | BACKGROUND_BLUE);
+}
+
+void Affichage::drawText( int y, int x, const std::string& str, WORD attributes )
+{
 	for (unsigned int i = 0; i < str.length(); i++)
 	{
-		buffer[3][t.Width() + i - str.length() - 1].Char.UnicodeChar = str[i];
-		buffer[3][t.Width() + i - str.length() - 1].Attributes = 0x0005 | BACKGROUND_BLUE;
+		buffer[y][i + x].Char.UnicodeChar = str[i];
+		buffer[y][i + x].Attributes = attributes;
 	}//*/
 }
 
@@ -147,17 +140,30 @@ void Affichage::drawMenu(Menu& m)
 	int xOffset = SCREEN_WIDTH / 2 - m.ButtonsWidth() / 2;
 	int yOffset = 0;
 	int i = 0;
-	for (auto it = m.Buttons().begin(); it != m.Buttons().end(); ++it) {
-		tile->Attributes = m.Index() == i++ ? 0x0f : 0x07;
-		tile->Char.UnicodeChar = 0xc9;//top left corner
+	for (auto button : m.Buttons()) {
+		int highlight = m.Index() == i++;
+		tile->Attributes = 0x0f;
+		tile->Char.UnicodeChar = highlight ? 0xc9 : 0xda;//top left corner
 		buffer[yOffset][xOffset] = *tile;
-		tile->Char.UnicodeChar = 0xbb;//top right corner
+		tile->Char.UnicodeChar = highlight ? 0xbb : 0xbf;//top right corner
 		buffer[yOffset][xOffset + m.ButtonsWidth() - 1] = *tile;
 
-		yOffset++;
-		tile->Char.UnicodeChar = 0xc8;//bottom left corner
+		tile->Char.UnicodeChar = highlight ? 0xcd : 0xc4;//top and bottom sides
+		for ( int x = 1; x < m.ButtonsWidth() - 1; ++x ) {
+			buffer[yOffset  ][xOffset + x] = *tile;
+			buffer[yOffset+2][xOffset + x] = *tile;
+		}
+		tile->Char.UnicodeChar = highlight ? 0xba : 0xb3;//left and right sides
+		{
+			buffer[++yOffset][xOffset] = *tile;
+			buffer[yOffset  ][xOffset + m.ButtonsWidth() - 1] = *tile;
+		}
+
+		drawText(yOffset, SCREEN_WIDTH / 2 - button->Text().size() / 2, button->Text(), 0x0f);
+
+		tile->Char.UnicodeChar = highlight ? 0xc8 : 0xc0;//bottom left corner
 		buffer[++yOffset][xOffset] = *tile;
-		tile->Char.UnicodeChar = 0xbc;//bottom right corner
+		tile->Char.UnicodeChar = highlight ? 0xbc : 0xd9;//bottom right corner
 		buffer[yOffset++][xOffset + m.ButtonsWidth() - 1] = *tile;
 	}
 
