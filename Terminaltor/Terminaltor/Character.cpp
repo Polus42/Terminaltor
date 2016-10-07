@@ -41,7 +41,7 @@ void Character::Jump() {
 }
 
 void Character::Shoot() {
-
+	Terrain::GetInstance() << new Bullet();
 }
 
 void Character::Update( float delta_ms ) {
