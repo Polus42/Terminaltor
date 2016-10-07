@@ -14,6 +14,7 @@ public:
 	void setKeyLeft(Command* c);
 	void setKeyDown(Command* c);
 	void setKeyRight(Command* c);
+	void setKeyCtrl(Command* c);
 private:
 	// List of command, assign each key a command
 	Command* key_escape;
@@ -23,6 +24,6 @@ private:
 	Command* key_left;
 	Command* key_down;
 	Command* key_right;
-
+	Command* key_ctrl;
 };
 

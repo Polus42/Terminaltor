@@ -6,11 +6,11 @@
 Terrain Terrain::s_instance;
 
 Terrain::Terrain() :
-GameObject(0, 0, 0, 0),
+GameObject( 0, 0 ),
 m_columnOffset( 0 ),
 m_distance( 0 )
 {
-	m_ennemies = std::list<Character>(10);
+	m_objects = std::list<PhysicsObject*>();
 }
 
 Terrain::~Terrain()
@@ -80,10 +80,10 @@ void Terrain::Update( float delta_ms ) {
 		GameState::SetState(STATE_PLAYER_DEAD);
 		return;
 	}
-	for (std::list<Character>::iterator it = m_ennemies.begin(); it != m_ennemies.end();) {
-		it->Update( delta_ms );
-		if (!it->GetHealth()) {
-			it = m_ennemies.erase(it);
+	for (std::list<PhysicsObject*>::iterator it = m_objects.begin(); it != m_objects.end();) {
+		(*it)->Update( delta_ms );
+		if ((*it)->IsPendingDelete()) {
+			it = m_objects.erase(it);
 		}
 		else{
 			++it;

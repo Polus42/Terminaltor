@@ -23,10 +23,12 @@ public:
 	inline float Distance() { return m_distance; }
 	inline void SetCharacter(Character* character) { m_character = character; }
 	inline Character* GetCharacter() { return m_character; }
-	inline void AddEnnemy(Character& character) { m_ennemies.push_back(character); }
-	inline std::list<Character>& GetEnnemies() { return m_ennemies; }
+	inline void AddEnnemy(PhysicsObject* object) { m_objects.push_back(object); }
+	inline std::list<PhysicsObject*>& GetObjects() { return m_objects; }
 
 	int GetTile( const int x, const int y );//function must be called with a positive value inferior to terrain width
+
+	inline Terrain& operator<<(PhysicsObject* object) { m_objects.push_back(object); return *this; };
 
 protected:
 	static Terrain s_instance;
@@ -40,5 +42,5 @@ protected:
 	int m_lastGroundHeight;
 
 	Character* m_character;
-	std::list<Character> m_ennemies;
+	std::list<PhysicsObject*> m_objects;
 };

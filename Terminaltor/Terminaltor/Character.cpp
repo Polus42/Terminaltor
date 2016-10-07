@@ -2,17 +2,13 @@
 #include "Terrain.h"
 
 Character::Character() :
-GameObject(),
-m_xSpeed( 0 ),
-m_ySpeed( 0 ),
+PhysicsObject(),
 m_health( 0 )
 {
 }
 
 Character::Character( float x, float y, int width, int height, int health ) :
-GameObject( x, y, width, height ),
-m_xSpeed( 0 ),
-m_ySpeed( 0 ),
+PhysicsObject( x, y, width, height ),
 m_health( health )
 {
 }
@@ -42,6 +38,10 @@ void Character::Jump() {
 	m_ySpeed = JUMP_SPEED;
 	m_y++;
 	m_onFLoor = false;
+}
+
+void Character::Shoot() {
+
 }
 
 void Character::Update( float delta_ms ) {

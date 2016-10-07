@@ -16,6 +16,7 @@
 #include "DownCommand.h"
 #include "GoRightCommand.h"
 #include "GoLeftCommand.h"
+#include "ShootCommand.h"
 #include "JumpCommand.h"
 #include "PlayCommand.h"
 #include "GameState.h"
@@ -44,6 +45,7 @@ int main(int argc, char *argv[])
 	player_input->setKeyRight(new GoRightCommand(c));
 	player_input->setKeySpace(new JumpCommand(c));
 	player_input->setKeyLeft(new GoLeftCommand(c));
+	player_input->setKeyCtrl(new ShootCommand(c));
 
 	// Creating menu and buttons
 	Menu* menu = new Menu(20);

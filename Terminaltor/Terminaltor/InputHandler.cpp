@@ -41,6 +41,10 @@ void InputHandler::handleInput()
 	{
 		key_left->execute();
 	}
+	if ((GetAsyncKeyState(VK_LCONTROL) || GetAsyncKeyState(VK_RCONTROL)) && key_ctrl)
+	{
+		key_ctrl->execute();
+	}
 }
 void InputHandler::setEscape(Command* c)
 {
@@ -69,4 +73,8 @@ void InputHandler::setKeySpace(Command* c)
 void InputHandler::setKeyUp(Command* c)
 {
 	key_up = c;
+}
+void InputHandler::setKeyCtrl(Command* c)
+{
+	key_ctrl = c;
 }
