@@ -90,3 +90,25 @@ void Terrain::Update( float delta_ms ) {
 		}
 	}
 }
+
+PhysicsObject* Terrain::CheckHit( PhysicsObject* testObject, float oldX )
+{
+	PhysicsObject* res = nullptr;
+	for ( std::list<PhysicsObject*>::iterator it = m_objects.begin(); it != m_objects.end();) {
+		if ( *it == testObject )
+			++it;
+		//if (RectA.Left < RectB.Right && RectA.Right > RectB.Left &&
+		//RectA.Top < RectB.Bottom && RectA.Bottom > RectB.Top )
+		if ( oldX < (*it)->X() + (*it)->Width() &&
+			testObject->X() + testObject->Width() > (*it)->X() &&
+			testObject->Y() + testObject->Height() > (*it)->Y() &&
+			testObject->Y() > (*it)->Y() + (*it)->Height() ) {
+			res = *it;
+			break;
+		}
+		else {
+			++it;
+		}
+	}
+	return res;
+}

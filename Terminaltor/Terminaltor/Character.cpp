@@ -42,7 +42,7 @@ void Character::Jump() {
 }
 
 void Character::Shoot() {
-	Terrain::GetInstance() << new Bullet();
+	Terrain::GetInstance() << new Bullet(X() + Width() + 30, Y() + Height() - 25);
 }
 
 void Character::Update( float delta_ms ) {
@@ -87,7 +87,15 @@ void Character::Update( float delta_ms ) {
 			m_onFLoor = false;
 	}
 	if (!m_onFLoor) {
-		m_y += ( m_ySpeed * dT ) / 1000.0f;
+		float oldY = m_y;
+		m_y += (m_ySpeed * dT) / 1000.0f;
+		if ( m_ySpeed <= 0 ) {
+			for (float y = oldY; y > m_y; y-=50.f)
+				if (terrain.GetTile(m_x, y) != 0) {
+					m_y = y;
+					break;
+				}
+		}
 		m_ySpeed -= ( GRAVITY * dT ) / 1000.0f;
 	}
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "PhysicsObject.h"
 
-#define JUMP_SPEED 750
-#define WALK_SPEED 150
+#define JUMP_SPEED 750.0f
+#define WALK_SPEED 150.0f
 #define GRAVITY    491.0f
 
 class Character :
@@ -24,7 +24,6 @@ public:
 	inline bool IsOnFloor() { return m_onFLoor; };
 
 protected:
-
 	bool m_onFLoor;
 
 	int m_health;

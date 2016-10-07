@@ -19,6 +19,8 @@ public:
 
 	void Update( float delta_ms ) override;
 
+	PhysicsObject* CheckHit( PhysicsObject* testObject, float oldX );
+
 	void Slide( const float distance );
 	inline float Distance() { return m_distance; }
 	inline void SetCharacter(Character* character) { m_character = character; }

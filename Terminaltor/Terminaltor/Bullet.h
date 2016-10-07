@@ -1,7 +1,7 @@
 #pragma once
 #include "PhysicsObject.h"
 
-#define BULLET_SPEED
+#define BULLET_SPEED 300.0f
 
 class Bullet :
 	public PhysicsObject

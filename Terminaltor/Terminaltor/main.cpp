@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 		if (buffer > GameState::Delay())
 		{
 			//GameState::SetFps(1.0f / buffer);
-			GameState::SetFps(buffer*1000000.f);//t->getElapsedSeconds()*1000000.0f
+			GameState::SetFps(buffer*1000.f);//t->getElapsedSeconds()*1000000.0f
 			/////////////////////////////////////////
 			// Update physics and input here
 			/////////////////////////////////////////
