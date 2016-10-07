@@ -3,6 +3,7 @@
 #include "Terrain.h"
 #include "GameState.h"
 #include <string>
+#include <fstream>
 
 Affichage::Affichage()
 {
@@ -37,6 +38,8 @@ Affichage::Affichage()
 	tile->Char.UnicodeChar = 178;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(4, *tile));
 	///////////////////////////////////////////////////////////////////////////
+	// Loading background
+	LoadBackground("Sprites/background.txt");
 	delete tile;
 }
 
@@ -169,7 +172,7 @@ void Affichage::drawMenu(Menu& m)
 
 		yOffset += gap * 2;
 	}
-
+	drawBackground();
 	delete tile;
 }
 
@@ -179,6 +182,32 @@ void Affichage::drawCharacter(Character& c)
 	tmp -= tmp % 100;
 	tmp += Terrain::GetInstance().Distance() % 100;
 	tmp /= 100;*/
-	buffer[Terrain::GetInstance().Height() - 1 - (int)(c.Y() / 100.0f)      ][(int)((c.X() - Terrain::GetInstance().Distance()) / 100)] = tileMap.at(3);
-	buffer[Terrain::GetInstance().Height() - 1 - (int)(c.Y() + 100.0f) / 100][(int)((c.X() - Terrain::GetInstance().Distance()) / 100)] = tileMap.at(3);
+	buffer[Terrain::GetInstance().Height() - 1 - (int)(c.Y() / 100)      ][(int)(c.X() - Terrain::GetInstance().Distance())/100] = tileMap.at(3);
+	buffer[Terrain::GetInstance().Height() - 1 - (int)(c.Y() + 100) / 100][(int)(c.X() - Terrain::GetInstance().Distance()) / 100] = tileMap.at(3);
+}
+
+void Affichage::LoadBackground(const char* path) {
+	std::ifstream infile(path);
+	std::string line;
+	int length = 0;
+	while (std::getline(infile, line))
+	{
+		for (int i = 0; i < line.size(); i++)
+		{
+			background[length][i] = line.at(i);
+		}
+		length++;
+	}
+	
+}
+
+void Affichage::drawBackground()
+{
+	for (int x = 0; x < SCREEN_WIDTH; x++)
+	{
+		for (int y = 0; y < SCREEN_HEIGHT; y++)
+		{
+			//buffer[x][y].Char.AsciiChar = background[x][y][0];
+		}
+	}
 }
