@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	int previous = 0;
 	int current = t->getElapsedMs();
 	int buffer = 0;
-	int delay = 33;
+	GameState::SetDelay(100);
 	int keysMask = 0;
 	
 	//Creation terrrain
@@ -47,7 +47,9 @@ int main(int argc, char *argv[])
 
 	// Creating menu and buttons
 	Menu* menu = new Menu(20);
-	*menu << Button(new PlayCommand(), "Play") << Button(new QuitCommand(), "Quit");
+	*menu << new Button(new PlayCommand(), "Play");
+	*menu << new Button(new PlayCommand(), "Credits");
+	*menu << new Button(new QuitCommand(), "Quit");
 	GameState::SetMainMenu(menu);
 	//Creation menu input handler
 	//menu->setEscape(new QuitCommand());
@@ -60,12 +62,12 @@ int main(int argc, char *argv[])
 	{
 		previous = current;
 
-		if (buffer > delay)
+		if (buffer > GameState::Delay())
 		{
 
 			GameState::SetFps(1000/buffer);
 
-			buffer = buffer % delay;
+			buffer = buffer % GameState::Delay();
 			/////////////////////////////////////////
 			// Update physics and input here
 			/////////////////////////////////////////
