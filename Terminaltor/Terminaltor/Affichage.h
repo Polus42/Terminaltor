@@ -41,5 +41,9 @@ private:
 
 	std::map<const int, CHAR_INFO> tileMap;
 
+	void LoadBackground(const char* path);
+
+	int background[SCREEN_HEIGHT][SCREEN_WIDTH];
+
 };
 

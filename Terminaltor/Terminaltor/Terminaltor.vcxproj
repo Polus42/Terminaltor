@@ -65,7 +65,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Affichage.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="DownCommand.cpp" />
+    <ClCompile Include="EnterCommand.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GoLeftCommand.cpp" />
@@ -73,27 +76,39 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuCommand.cpp" />
     <ClCompile Include="NYTimer.cpp" />
+    <ClCompile Include="PlayCommand.cpp" />
     <ClCompile Include="QuitCommand.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="UpCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Affichage.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="DownCommand.h" />
+    <ClInclude Include="EnterCommand.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GoLeftCommand.h" />
     <ClInclude Include="GoRightCommand.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="JumpCommand.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuCommand.h" />
     <ClInclude Include="NYTimer.h" />
+    <ClInclude Include="PlayCommand.h" />
     <ClInclude Include="QuitCommand.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="UpCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sprites\character" />
