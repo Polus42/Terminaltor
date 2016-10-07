@@ -1,11 +1,8 @@
 #include "GoRightCommand.h"
-#include "Character.h"
-#include "Terrain.h"
 
-GoRightCommand::GoRightCommand(Character *c,Terrain* t)
+GoRightCommand::GoRightCommand(Character *c)
 {
 	character = c;
-	terrain = t;
 }
 
 
@@ -15,6 +12,7 @@ GoRightCommand::~GoRightCommand()
 
 void GoRightCommand::execute()
 {
-	character->Move(1);
-	//terrain->Slide(1);
+	//*
+	character->Move(1);/*/
+	terrain->Slide(100);//*/
 }

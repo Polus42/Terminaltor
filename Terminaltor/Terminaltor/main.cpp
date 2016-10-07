@@ -8,10 +8,17 @@
 #include "Terrain.h"
 #include "InputHandler.h"
 #include "QuitCommand.h"
+#include "EnterCommand.h"
+#include "MenuCommand.h"
+#include "UpCommand.h"
+#include "DownCommand.h"
 #include "GoRightCommand.h"
 #include "GoLeftCommand.h"
 #include "JumpCommand.h"
+#include "PlayCommand.h"
 #include "GameState.h"
+#include "Menu.h"
+#include "Button.h"
 
 int main(int argc, char *argv[])
 {
@@ -27,17 +34,26 @@ int main(int argc, char *argv[])
 	//Creation terrrain
 	Terrain::ResizeInstance(80, 25);
 	//Initialisation gamestate
-	GameState::SetState(STATE_PLAYING);
+	GameState::SetState(STATE_MENU);
 	//Creation character
 	Character *c = new Character(100, MAX_HEIGHT*100, 50, 180, 100);
 	Terrain::GetInstance().SetCharacter(c);
-	//Creation input handler
-	InputHandler *input = new InputHandler(Terrain::GetInstance(),*c);
-	// Assigning each key a command
-	input->setEscape(new QuitCommand());
-	input->setKeyRight(new GoRightCommand(c, &Terrain::GetInstance()));
-	input->setKeySpace(new JumpCommand(c));
-	input->setKeyLeft(new GoLeftCommand(c, &Terrain::GetInstance()));
+	//Creation player input handler
+	InputHandler *player_input = new InputHandler();
+	player_input->setEscape(new MenuCommand());
+	player_input->setKeyRight(new GoRightCommand(c));
+	player_input->setKeySpace(new JumpCommand(c));
+	player_input->setKeyLeft(new GoLeftCommand(c));
+
+	// Creating menu and buttons
+	Menu* menu = new Menu(20);
+	*menu << Button(new PlayCommand(), "Play") << Button(new QuitCommand(), "Quit");
+	GameState::SetMainMenu(menu);
+	//Creation menu input handler
+	//menu->setEscape(new QuitCommand());
+	menu->setKeyEnter(new EnterCommand(menu));
+	menu->setKeyUp(new UpCommand(menu));
+	menu->setKeyDown(new DownCommand(menu));
 
 	// Boucle affichage
 	while (GameState::State())
@@ -46,18 +62,21 @@ int main(int argc, char *argv[])
 
 		if (buffer > delay)
 		{
+
+			GameState::SetFps(1000/buffer);
+
 			buffer = buffer % delay;
 			/////////////////////////////////////////
 			// Update physics and input here
 			/////////////////////////////////////////
-			input->handleInput();
 			switch (GameState::State())
 			{
 			case STATE_PLAYING:
+				player_input->handleInput();
 				Terrain::GetInstance().Update(buffer);
 				break;
 			case STATE_MENU:
-				
+				menu->handleInput();
 				break;
 			case STATE_PLAYER_DEAD:
 
@@ -69,7 +88,7 @@ int main(int argc, char *argv[])
 		/////////////////////////////////////////
 		// Update drawing here
 		/////////////////////////////////////////
-		aff->draw(Terrain::GetInstance());
+		aff->draw();
 		/////////////////////////////////////////
 		current = t->getElapsedMs();
 		buffer += current - previous;

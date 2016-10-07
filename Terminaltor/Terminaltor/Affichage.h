@@ -1,8 +1,8 @@
 #pragma once
 #include "Terrain.h"
+#include "Menu.h"
 #include <windows.h>
 #include <map>
-
 
 class Affichage
 {
@@ -21,7 +21,8 @@ public:
 	} CHAR_INFO, *PCHAR_INFO;
 
 	*/
-	void draw(Terrain& t);
+	void draw();
+	void drawMenu(Menu& m);
 	void drawHud(Terrain& t);
 	void drawCharacter(Character& c);
 private:
