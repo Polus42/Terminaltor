@@ -3,6 +3,7 @@
 #include "Terrain.h"
 #include "GameState.h"
 #include <string>
+#include <fstream>
 
 Affichage::Affichage()
 {
@@ -37,6 +38,8 @@ Affichage::Affichage()
 	tile->Char.UnicodeChar = 178;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(4, *tile));
 	///////////////////////////////////////////////////////////////////////////
+	// Loading background
+	LoadBackground("Sprites/background.txt");
 	delete tile;
 }
 
@@ -181,4 +184,14 @@ void Affichage::drawCharacter(Character& c)
 	tmp /= 100;*/
 	buffer[Terrain::GetInstance().Height() - 1 - (c.Y() / 100)      ][(c.X() - Terrain::GetInstance().Distance())/100] = tileMap.at(3);
 	buffer[Terrain::GetInstance().Height() - 1 - (c.Y() + 100) / 100][(c.X() - Terrain::GetInstance().Distance()) / 100] = tileMap.at(3);
+}
+
+void Affichage::LoadBackground(const char* path) {
+	std::ifstream infile(path);
+	std::string line;
+	while (std::getline(infile, line))
+	{
+		std::cout << line << std::endl;
+	}
+	
 }
