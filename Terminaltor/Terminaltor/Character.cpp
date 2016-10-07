@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "Terrain.h"
+#include "Bullet.h"
 
 Character::Character() :
 PhysicsObject(),

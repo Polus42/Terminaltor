@@ -35,7 +35,7 @@ Affichage::Affichage()
 	tile->Char.UnicodeChar = 0x20;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(3, *tile));
 	// Background
-	tile->Attributes = BACKGROUND_RED;
+	tile->Attributes = 0;
 	tile->Char.UnicodeChar = 178;
 	tileMap.insert(std::pair<const int, CHAR_INFO>(4, *tile));
 	///////////////////////////////////////////////////////////////////////////
