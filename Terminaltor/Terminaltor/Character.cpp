@@ -9,7 +9,7 @@ m_health( 0 )
 {
 }
 
-Character::Character( int x, int y, int width, int height, int health ) :
+Character::Character( float x, float y, int width, int height, int health ) :
 GameObject( x, y, width, height ),
 m_xSpeed( 0 ),
 m_ySpeed( 0 ),
@@ -44,53 +44,53 @@ void Character::Jump() {
 	m_onFLoor = false;
 }
 
-void Character::Update( long delta_ms ) {
+void Character::Update( float delta_ms ) {
 	Terrain& terrain = Terrain::GetInstance();
-	//int oldX = m_x;
+	float dT = delta_ms * 10.0f;
 	
-	int testX = (m_xSpeed > 0) ? m_x + m_width : m_x;
+	int testX = (m_xSpeed > 0.0f) ? m_x + m_width : m_x;
 	if ( terrain.GetTile(testX, m_y) != 0 ) {
-		if ( terrain.GetTile(testX, m_y + 100) != 0 ) {
-			m_x /= 100;
-			m_x *= 100;
-			m_xSpeed = 0;
+		if ( terrain.GetTile(testX, m_y + 100.0f) != 0 ) {
+			m_x /= 100.0f;
+			m_x *= 100.0f;
+			m_xSpeed = 0.0f;
 		}
 		else {
-			m_y += 100;
+			m_y += 100.0f;
 		}
 	}
 	{
-		m_x += (m_xSpeed * delta_ms) / 1000;
+		m_x += ( m_xSpeed * dT ) / 1000;
 	}
 	{
 		Terrain& terrain = Terrain::GetInstance();
-		int dX = terrain.Distance() + ((terrain.Width()*100) / 3);
+		int dX = terrain.Distance() + ((terrain.Width()*100.0f) / 3);
 		//*
 		if (m_x >= dX)
 			terrain.Slide(m_x - dX);//*/
 	}
 	
-	int testY = (m_ySpeed > 0) ? m_y + m_height : m_y - 100;
+	int testY = (m_ySpeed > 0.0f) ? m_y + m_height : m_y - 100.0f;
 	if ( terrain.GetTile( m_x, testY ) != 0 ) {
-		m_y /= 100;
-		m_y *= 100;
-		if (m_ySpeed <= 0) {
+		m_y /= 100.0f;
+		m_y *= 100.0f;
+		if (m_ySpeed <= 0.0f) {
 			m_onFLoor = true;/*
 			if ( terrain.GetTile( m_x, m_y ) != 0 )
 				m_y += 100;//*/
 		}
-		m_ySpeed = 0;
+		m_ySpeed = 0.0f;
 	}
 	else {
-		if (m_ySpeed <= 0)
+		if (m_ySpeed <= 0.0f)
 			m_onFLoor = false;
 	}
 	if (!m_onFLoor) {
-		m_y += ( m_ySpeed * delta_ms ) / 1000;
-		m_ySpeed -= ( 1000000 * delta_ms ) / 1000;
+		m_y += ( m_ySpeed * dT ) / 1000.0f;
+		m_ySpeed -= ( 1000000.0f * dT ) / 1000.0f;
 	}
 
-	m_xSpeed = 0;
+	m_xSpeed = 0.0f;
 }
 
 int Character::GetHealth()

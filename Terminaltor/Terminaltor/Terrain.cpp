@@ -46,12 +46,12 @@ Terrain& Terrain::GetInstance() {
 	return s_instance;
 }
 
-void Terrain::Slide( const int distance ) {
+void Terrain::Slide( const float distance ) {
 	m_columnOffset += distance;
 	m_distance += distance;
 	if (m_columnOffset > 0) {
 		m_columnOffset -= m_width*100;
-		Generate(((m_distance / 100) / m_width) % 2 ? 0 : m_width);
+		Generate((int)((m_distance / 100.0f) / m_width) % 2 ? 0 : m_width);
 	}
 }
 
@@ -74,7 +74,7 @@ void Terrain::Generate( const int offset ) {
 	}
 }
 
-void Terrain::Update(long delta_ms) {
+void Terrain::Update( float delta_ms ) {
 	m_character->Update(delta_ms);
 	if ( !m_character->GetHealth() ) {
 		GameState::SetState(STATE_PLAYER_DEAD);

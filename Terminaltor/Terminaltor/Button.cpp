@@ -1,8 +1,8 @@
 #include "Button.h"
 
 Button::Button( Command* c, const std::string& text ) :
-m_command( c ),
-m_text( text )
+m_command(c),
+m_text(text)
 {
 }
 
