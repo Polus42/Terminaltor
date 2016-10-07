@@ -45,7 +45,7 @@ private:
 
 	void LoadBackground(const char* path);
 
-	std::string background[SCREEN_HEIGHT][SCREEN_WIDTH];
+	char background[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 };
 
