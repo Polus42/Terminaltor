@@ -2,8 +2,8 @@
 #include "Character.h"
 #include <list>
 
-#define MIN_HEIGHT 2
-#define MAX_HEIGHT 4
+#define MIN_HEIGHT 3
+#define MAX_HEIGHT 13
 
 class Terrain :
 	public GameObject
