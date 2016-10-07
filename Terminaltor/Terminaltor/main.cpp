@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	NYTimer *t = new NYTimer();
 	t->start();
 	float buffer = 0;
-	GameState::SetDelay(0.1f);
+	GameState::SetDelay(1.0f);
 	int keysMask = 0;
 	
 	//Creation terrrain
