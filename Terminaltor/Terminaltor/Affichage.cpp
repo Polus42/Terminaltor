@@ -179,6 +179,6 @@ void Affichage::drawCharacter(Character& c)
 	tmp -= tmp % 100;
 	tmp += Terrain::GetInstance().Distance() % 100;
 	tmp /= 100;*/
-	buffer[Terrain::GetInstance().Height() - 1 - (c.Y() / 100)      ][(c.X() - Terrain::GetInstance().Distance())/100] = tileMap.at(3);
-	buffer[Terrain::GetInstance().Height() - 1 - (c.Y() + 100) / 100][(c.X() - Terrain::GetInstance().Distance()) / 100] = tileMap.at(3);
+	buffer[Terrain::GetInstance().Height() - 1 - (int)(c.Y() / 100.0f)      ][(int)((c.X() - Terrain::GetInstance().Distance()) / 100)] = tileMap.at(3);
+	buffer[Terrain::GetInstance().Height() - 1 - (int)(c.Y() + 100.0f) / 100][(int)((c.X() - Terrain::GetInstance().Distance()) / 100)] = tileMap.at(3);
 }

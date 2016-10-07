@@ -11,6 +11,6 @@ MenuCommand::~MenuCommand()
 
 void MenuCommand::execute()
 {
-	GameState::SetDelay(100);
+	GameState::SetDelay(0.1f);
 	GameState::SetState(STATE_MENU);
 }

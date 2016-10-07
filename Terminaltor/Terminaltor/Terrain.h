@@ -17,10 +17,10 @@ public:
 	static void ResizeInstance( int width, int height );
 	static Terrain& GetInstance();
 
-	void Update(long delta_ms) override;
+	void Update( float delta_ms ) override;
 
-	void Slide( const int distance );
-	inline int Distance() { return m_distance; }
+	void Slide( const float distance );
+	inline float Distance() { return m_distance; }
 	inline void SetCharacter(Character* character) { m_character = character; }
 	inline Character& GetCharacter() { return *m_character; }
 	inline void AddEnnemy(Character& character) { m_ennemies.push_back(character); }
@@ -35,8 +35,8 @@ protected:
 	void Generate( const int offset );
 
 	int** m_tiles;
-	int m_columnOffset;
-	int m_distance;
+	float m_columnOffset;
+	float m_distance;
 	int m_lastGroundHeight;
 
 	Character* m_character;

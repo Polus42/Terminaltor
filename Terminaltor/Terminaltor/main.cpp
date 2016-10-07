@@ -27,10 +27,8 @@ int main(int argc, char *argv[])
 	Affichage *aff = new Affichage();
 	NYTimer *t = new NYTimer();
 	t->start();
-	int previous = 0;
-	int current = t->getElapsedMs();
-	int buffer = 0;
-	GameState::SetDelay(100);
+	float buffer = 0;
+	GameState::SetDelay(0.1f);
 	int keysMask = 0;
 	
 	//Creation terrrain
@@ -71,14 +69,12 @@ int main(int argc, char *argv[])
 	// Boucle affichage
 	while (GameState::State())
 	{
-		previous = current;
-
 		if (buffer > GameState::Delay())
 		{
 
-			GameState::SetFps(1000/buffer);
+			GameState::SetFps(1.0f/buffer);
 
-			buffer = buffer % GameState::Delay();
+			buffer = buffer - GameState::Delay();
 			/////////////////////////////////////////
 			// Update physics and input here
 			/////////////////////////////////////////
@@ -86,7 +82,7 @@ int main(int argc, char *argv[])
 			{
 			case STATE_PLAYING:
 				player_input->handleInput();
-				Terrain::GetInstance().Update(buffer);
+				Terrain::GetInstance().Update(buffer*1000.0f);
 				break;
 			case STATE_MENU:
 				GameState::MainMenu()->handleInput();
@@ -103,8 +99,7 @@ int main(int argc, char *argv[])
 		/////////////////////////////////////////
 		aff->draw();
 		/////////////////////////////////////////
-		current = t->getElapsedMs();
-		buffer += current - previous;
+		buffer += t->getElapsedSeconds(true);
 	}
 	return 0;
 }

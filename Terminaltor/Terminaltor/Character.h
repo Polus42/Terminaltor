@@ -9,10 +9,10 @@ class Character :
 {
 public:
 	Character();
-	Character( int x, int y, int width, int height, int health );
+	Character( float x, float y, int width, int height, int health );
 	~Character();
 
-	void Update( long delta_ms ) override;
+	void Update( float delta_ms ) override;
 
 	void Move( int direction );
 	void Jump();
@@ -20,15 +20,15 @@ public:
 	int GetHealth();
 
 	inline bool IsOnFloor() { return m_onFLoor; };
-	inline int XSpeed() { return m_xSpeed; };
-	inline int YSpeed() { return m_ySpeed; };
+	inline float XSpeed() { return m_xSpeed; };
+	inline float YSpeed() { return m_ySpeed; };
 
 protected:
 
 	bool m_onFLoor;
 
 	int m_health;
-	int m_xSpeed;
-	int m_ySpeed;
+	float m_xSpeed;
+	float m_ySpeed;
 };
 
