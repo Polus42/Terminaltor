@@ -67,9 +67,10 @@ int main(int argc, char *argv[])
 	credits->SetParent(menu);
 
 	*menu << credits;
-
+	OutputDebugString("test");
 	// Boucle affichage
 	aff->draw();
+	Terrain::GetInstance().AddEnnemy(new PhysicsObject(50, 50, 1, 1));
 	while (GameState::State())
 	{
 		if (buffer > GameState::Delay())
